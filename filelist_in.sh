@@ -30,6 +30,26 @@ case ${run} in
         done
         ;;
     
+    "nwp0005")
+        directory="/mnt/lustre01/work/mh0287/k203123/GIT/icon-aes-dyw_cldL/experiments/nwp0005"
+        var2file["T"]="nwp0005_atm_3d_tp_ml_"
+        var2file["P"]="nwp0005_atm_3d_tp_ml_"
+        var2file["U"]="nwp0005_atm_3d_uvw_ml_"
+        var2file["V"]="nwp0005_atm_3d_uvw_ml_"
+        var2file["W"]="nwp0005_atm_3d_uvw_ml_"
+        var2file["QV"]="nwp0005_atm_3d_q_ml_"
+        var2file["PS"]="nwp0005_atm_2d_ml_"
+
+        d=${start_date}
+        while [ ${d} != ${end_date} ]; do 
+            datestr=$(date -d "${d}" +%Y%m%d)
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            d=$(date -I -d "${d} + 1 day")
+        done
+        ;;
+        
     *)
         echo "Run ${run} unknown"
         ;;
