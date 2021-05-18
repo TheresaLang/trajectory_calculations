@@ -16,17 +16,16 @@ in_file=$1
 out_file=$2
 grid_file=$3
 weights_file=$4
-variable_name_in=$5
-variable_name_out=$6
-lon_lat_box=$7
-seltimestep=$8
+variable_name=$5
+lon_lat_box=$6
+seltimestep=$7
 
 temp_file="${out_file}_temp"
 
 if [ -z ${seltimestep} ]; then
-    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -chname,${variable_name_in},${variable_name_out} -selvar,${variable_name_in} ${in_file} ${temp_file}
+    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -selvar,${variable_name} -setpartabn,$PARTAB ${in_file} ${temp_file}
 elif [ -n ${seltimestep} ]; then
-    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -chname,${variable_name_in},${variable_name_out} -selvar,${variable_name_in} -seltimestep,${seltimestep} ${in_file} ${temp_file}
+    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -selvar,${variable_name} -seltimestep,${seltimestep} -setpartabn,$PARTAB ${in_file} ${temp_file}
 fi
 
 cdo --verbose splithour ${temp_file} ${out_file}

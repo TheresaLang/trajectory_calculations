@@ -1,7 +1,10 @@
 #!/bin/bash
+# general settings
+source config.sh
 
+# specific settings
 run="nwp0005"
-variables=("T")
+variables=("W")
 start_date="2020-02-01"
 end_date="2020-02-05"
 seltimestep="" # timesteps to select from each file; empty string --> select all timesteps
@@ -17,7 +20,7 @@ for var in ${variables[@]}; do
     read -r -a filelist_out <<< $(bash filelist_out.sh ${out_dir} ${run} ${var} ${start_date} ${end_date})
     echo ${filelist_in[1]}
     for i in ${!filelist_in[@]}; do
-        sbatch interpolate_horizontally.sh ${filelist_in[i]} ${filelist_out[i]} ${grid_file} ${weights_file} ${var_name_in} ${var} ${lon_lat_box} ${seltimestep}
+        sbatch interpolate_horizontally.sh ${filelist_in[i]} ${filelist_out[i]} ${grid_file} ${weights_file} ${var} ${lon_lat_box} ${seltimestep}
     done
 done    
 
