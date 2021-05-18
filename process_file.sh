@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=interpolate_horizontally
-#SBATCH --output=logs/interpolate_horizontally-%j.out
-##SBATCH --error=interpolate_horizontally-%j.err
+#SBATCH --job-name=process_file
+#SBATCH --output=logs/process_file-%j.out
+##SBATCH --error=logs/process_file-%j.err
 
 #SBATCH --account=mh1126             # Charge resources on this project account
 #SBATCH --partition=compute,compute2 # partition name
@@ -12,22 +12,29 @@
 ##SBATCH --constraint=256G           # only run on fat memory nodes 
 ##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
 
+# Set shell options (exit on any error, no unset variables, print commands)
+set -o errexit -o nounset -o xtrace
+
 in_file=$1
 out_file=$2
 grid_file=$3
 weights_file=$4
-variable_name=$5
+variable=$5
 lon_lat_box=$6
-seltimestep=$7
+timesteps=$7
 
 temp_file="${out_file}_temp"
 
-if [ -z ${seltimestep} ]; then
-    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -selvar,${variable_name} -setpartabn,$PARTAB ${in_file} ${temp_file}
-elif [ -n ${seltimestep} ]; then
-    cdo --verbose sellonlatbox,${lon_lat_box} -remap,${grid_file},${weights_file} -selvar,${variable_name} -seltimestep,${seltimestep} -setpartabn,$PARTAB ${in_file} ${temp_file}
-fi
+cdo $CDO_OPTS \
+sellonlatbox,${lon_lat_box} \
+-remap,${grid_file},${weights_file} \
+-selvar,${variable} \
+-setpartabn,$PARTAB \
+-seltime,${timesteps} \
+${in_file} ${temp_file}
 
+# vertical interpolation for W
+    
 cdo --verbose splithour ${temp_file} ${out_file}
 
 rm ${temp_file}
