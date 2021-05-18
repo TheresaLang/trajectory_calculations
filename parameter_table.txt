@@ -1,0 +1,97 @@
+&parameter 
+ name         = ta
+ out_name     = T
+ standard_name = air_temperature 
+ units        = "K" 
+/
+
+&parameter 
+ name         = temp
+ out_name     = T
+ standard_name = air_temperature 
+ units        = "K" 
+/
+
+&parameter 
+ name         = pfull
+ out_name     = P
+ standard_name = air_pressure 
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = pres
+ out_name     = P
+ standard_name = air_pressure 
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = ua
+ out_name     = U
+ standard_name = estward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = u
+ out_name     = U
+ standard_name = estward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = va
+ out_name     = V
+ standard_name = northward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = v
+ out_name     = V
+ standard_name = northward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = wap
+ out_name     = OMEGA
+ standard_name = upward_air_velocity
+ units        = "Pa s-1" 
+/
+
+&parameter 
+ name         = w
+ out_name     = W
+ standard_name = upward_air_velocity
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = hus
+ out_name     = QV
+ standard_name = tot_qi_dia
+ units        = "kg kg-1" 
+/
+
+&parameter 
+ name         = qv
+ out_name     = QV
+ standard_name = tot_qi_dia
+ units        = "kg kg-1" 
+/
+
+&parameter 
+ name         = ps
+ out_name     = PS
+ standard_name = surface_air_pressure
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = pres_sfc
+ out_name     = PS
+ standard_name = surface_air_pressure
+ units        = "Pa" 
+/
