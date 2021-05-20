@@ -5,7 +5,7 @@ source config.sh
 
 # specific settings
 run='nwp0005'
-variables=('W' 'PS')
+variables=('PS', 'P', 'T', 'QV', 'U', 'V', 'W')
 start_date='2020-02-01'
 end_date='2020-02-05'
 timesteps='00:00:00,03:00:00,06:00:00,09:00:00,12:00:00,15:00:00,18:00:00,21:00:00' 
@@ -27,7 +27,19 @@ for var in ${variables[@]}; do
 done
 
 # merge files
-#sbatch "--dependency=afterok${job_ids}" merge_files.sh 
+#sbatch "--dependency=afterok${job_ids}" 
+#sbatch ./merge_files.sh ${start_date} ${end_date} ${timesteps} ${variables} "${out_dir}/${run}" 
+
+d=${start_date}
+while [ ${d} != ${end_date} ]; do
+    datestr=$(date -d "${d}" +%Y%m%d)
+    IFS=',' read -ra hours <<< "${timesteps}"
+    for hour in ${hours[@]}; do
+        timestr="${datestr}_${hour:0:2}"
+        sbatch --dependency=afterok${job_ids} merge_files.sh "${out_dir}/${run}/*${timestr}.nc" "${out_dir}/${run}/P${timestr}"
+    done
+    d=$(date -I -d "${d} + 1 day")
+done
 
 # wenn alle jobs durchgelaufen sind: merge jeweils alle files (=Variablen), die zu einem Zeitschritt gehören
 # OMEGA bze. W muss vertical interpoliert werden
