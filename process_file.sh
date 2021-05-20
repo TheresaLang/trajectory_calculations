@@ -21,16 +21,24 @@ grid_file=$3
 weights_file=$4
 variable=$5
 lon_lat_box=$6
-timesteps=$7
+timestep=$7
 
 temp_file="${out_file}_temp"
 
+timestep_str=''
+d='1970-01-01 00:00:00'
+while [ $(date -d "${d}" "+%d") == '01' ]; do
+    s="$(date -d "${d}" +%H:%M:%S)"
+    timestep_str="${timestep_str},${s}" 
+    d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M:%S")  
+done
+ 
 cdo $CDO_OPTS \
 sellonlatbox,${lon_lat_box} \
 -remap,${grid_file},${weights_file} \
 -selvar,${variable} \
 -setpartabn,$PARTAB \
--seltime,${timesteps} \
+-seltime${timestep_str} \
 ${in_file} ${temp_file}
     
 cdo --verbose splithour ${temp_file} ${out_file}

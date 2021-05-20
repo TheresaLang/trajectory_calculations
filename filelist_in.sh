@@ -2,8 +2,8 @@
 
 run=$1
 var=$2
-start_date=$3
-end_date=$4
+start_date="$3"
+end_date="$4"
 
 filelist=()
 declare -A var2file
@@ -21,12 +21,12 @@ case ${run} in
         var2file["PS"]="dpp0029_atm_2d_ml_"
 
         d=${start_date}
-        while [ ${d} != ${end_date} ]; do 
+        while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
             file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -I -d "${d} + 1 day")
+            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
     
@@ -41,12 +41,12 @@ case ${run} in
         var2file["PS"]="nwp0005_atm_2d_ml_"
 
         d=${start_date}
-        while [ ${d} != ${end_date} ]; do 
+        while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
             file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -I -d "${d} + 1 day")
+            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
         

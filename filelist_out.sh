@@ -14,11 +14,11 @@ case ${run} in
         directory="${out_dir}/dpp0029"
 
         d=${start_date}
-        while [ ${d} != ${end_date} ]; do 
+        while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
             file="${directory}/${var}_${datestr}_"
             echo ${file}
-            d=$(date -I -d "${d} + 1 day")
+            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
     
@@ -26,11 +26,11 @@ case ${run} in
         directory="${out_dir}/nwp0005"
 
         d=${start_date}
-        while [ ${d} != ${end_date} ]; do 
+        while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
             file="${directory}/${var}_${datestr}_"
             echo ${file}
-            d=$(date -I -d "${d} + 1 day")
+            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
     *)
