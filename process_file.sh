@@ -32,8 +32,6 @@ sellonlatbox,${lon_lat_box} \
 -setpartabn,$PARTAB \
 -seltime,${timesteps} \
 ${in_file} ${temp_file}
-
-# vertical interpolation for W
     
 cdo --verbose splithour ${temp_file} ${out_file}
 
