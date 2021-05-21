@@ -40,6 +40,11 @@ sellonlatbox,${lon_lat_box} \
 -setpartabn,$PARTAB \
 -seltime${timestep_str} \
 ${in_file} ${temp_file}
+
+# Additional height dimension for PS
+if [ ${variable} == 'PS' ]; then
+    ncap2 -O -s 'defdim("height",1);PS[$time,$height,$lat,$lon]=PS' ${temp_file} ${temp_file} 
+fi
     
 cdo --verbose splithour ${temp_file} ${out_file}
 
