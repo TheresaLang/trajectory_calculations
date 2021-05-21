@@ -14,6 +14,7 @@ while [ "${d}" != "${end_date}" ]; do
     d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M")
 done
 
+ln -s "${source_dir}/ICONCONST" "${target_dir}"
 
 
 
