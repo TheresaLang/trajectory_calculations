@@ -25,6 +25,8 @@ timestep=$7
 
 temp_file="${out_file}_temp"
 
+### Opitons for CDO command
+# Create string for CDO command seltime
 timestep_str=''
 d='1970-01-01 00:00:00'
 while [ $(date -d "${d}" "+%d") == '01' ]; do
@@ -32,20 +34,30 @@ while [ $(date -d "${d}" "+%d") == '01' ]; do
     timestep_str="${timestep_str},${s}" 
     d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M:%S")  
 done
- 
+
+# Create CDO command sellev
+sellev='' # empty command for all variables except vertical velocity W
+# For W the uppermost and lowermost levels are removed
+if [ ${variable} == 'W' ]; then
+    sellev="-sellevidx,2/74/1"
+fi
+
+### CDO command
 cdo $CDO_OPTS \
 sellonlatbox,${lon_lat_box} \
 -remap,${grid_file},${weights_file} \
+${sellev} \
 -selvar,${variable} \
 -setpartabn,$PARTAB \
 -seltime${timestep_str} \
 ${in_file} ${temp_file}
 
-# Additional height dimension for PS
+### Additional height dimension for PS
 if [ ${variable} == 'PS' ]; then
     ncap2 -O -s 'defdim("height",1);PS[$time,$height,$lat,$lon]=PS' ${temp_file} ${temp_file} 
 fi
-    
+
+### Split file into one file for each time step  
 cdo --verbose splithour ${temp_file} ${out_file}
 
 rm ${temp_file}
