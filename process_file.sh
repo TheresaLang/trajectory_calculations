@@ -44,11 +44,17 @@ fi
 
 ### CDO command
 cdo ${CDO_OPTS} \
+# select latitude-longitude box
 sellonlatbox,${lon_lat_box} \
+# regrid to latitude-longitude grid
 -remap,${grid_file},${weights_file} \
+# select levels (only for vertical velocity)
 ${sellev} \
+# select variabble
 -selvar,${variable} \
+# rename variables
 -setpartabn,$PARTAB \
+# select times
 -seltime${timestep_str} \
 ${in_file} ${temp_file}
 
