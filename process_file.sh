@@ -43,7 +43,7 @@ if [ ${variable} == 'W' ]; then
 fi
 
 ### CDO command
-cdo $CDO_OPTS \
+cdo ${CDO_OPTS} \
 sellonlatbox,${lon_lat_box} \
 -remap,${grid_file},${weights_file} \
 ${sellev} \
@@ -58,7 +58,7 @@ if [ ${variable} == 'PS' ]; then
 fi
 
 ### Split file into one file for each time step  
-cdo --verbose splithour ${temp_file} ${out_file}
+cdo ${CDO_OPTS} splithour ${temp_file} ${out_file}
 
 rm ${temp_file}
 
