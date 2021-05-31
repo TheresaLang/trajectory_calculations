@@ -54,7 +54,7 @@ ${sellev} \
 -selvar,${variable} \
 # rename variables
 -setpartabn,$PARTAB \
-# select times
+# select timesteps
 -seltime${timestep_str} \
 ${in_file} ${temp_file}
 
