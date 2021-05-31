@@ -35,26 +35,17 @@ while [ $(date -d "${d}" "+%d") == '01' ]; do
     d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M:%S")  
 done
 
-# Create CDO command sellev
-sellev='' # empty command for all variables except vertical velocity W
-# For W the uppermost and lowermost levels are removed
-if [ ${variable} == 'W' ]; then
-    sellev="-sellevidx,2/74/1"
-fi
-
 ### CDO command
-cdo ${CDO_OPTS} \
 # select latitude-longitude box
-sellonlatbox,${lon_lat_box} \
 # regrid to latitude-longitude grid
--remap,${grid_file},${weights_file} \
-# select levels (only for vertical velocity)
-${sellev} \
 # select variabble
--selvar,${variable} \
 # rename variables
--setpartabn,$PARTAB \
 # select timesteps
+cdo ${CDO_OPTS} \
+sellonlatbox,${lon_lat_box} \
+-remap,${grid_file},${weights_file} \
+-selvar,${variable} \
+-setpartabn,$PARTAB \
 -seltime${timestep_str} \
 ${in_file} ${temp_file}
 
