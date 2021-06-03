@@ -62,7 +62,6 @@ case ${run} in
         var2file["PW"]="ots0001_atm1_2d_ml_"
 
         d=${start_date}
-        echo $d
         while [ "${d}" != "${end_date}" ]; do
             datestr=$(date -d "${d}" +%Y%m%dT%H%M%SZ)
             file="${directory}/${var2file[${var}]}${datestr}.nc"
@@ -72,7 +71,6 @@ case ${run} in
                 d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
             else 
                 d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
-                echo $d
             fi
         done
         ;;        
