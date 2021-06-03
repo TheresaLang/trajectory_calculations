@@ -49,7 +49,33 @@ case ${run} in
             d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
-        
+
+    "ots0001")
+        directory='/mnt/lustre02/work/bm1183/OTS/experiments/ots0001'
+        var2file["T"]="ots0001_atm_3d_t_ml_"
+        var2file["P"]="ots0001_atm_3d_pres_ml_"
+        var2file["U"]="ots0001_atm_3d_u_ml_"
+        var2file["V"]="ots0001_atm_3d_v_ml_"
+        var2file["W"]="ots0001_atm_3d_w_ml_"
+        var2file["QV"]="ots0001_atm_3d_qv_ml_"
+        var2file["PS"]="ots0001_atm2_2d_ml_"
+        var2file["PW"]="ots0001_atm1_2d_ml_"
+
+        d=${start_date}
+        echo $d
+        while [ "${d}" != "${end_date}" ]; do
+            datestr=$(date -d "${d}" +%Y%m%dT%H%M%SZ)
+            file="${directory}/${var2file[${var}]}${datestr}.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then      
+                d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+            else 
+                d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
+                echo $d
+            fi
+        done
+        ;;        
     *)
         echo "Run ${run} unknown"
         ;;
