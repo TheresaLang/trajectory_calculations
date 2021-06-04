@@ -14,55 +14,42 @@
 
 # Set shell options (exit on any error, no unset variables, print commands)
 set -o errexit -o nounset -o xtrace
+source cdo_config.sh
 
 in_file=$1
-out_file=$2
-grid_file=$3
-weights_file=$4
-variable=$5
-lon_lat_box=$6
-timestep=$7
+out_date=$2
+out_dir=$3
+grid_file=$4
+weights_file=$5
+variable=$6
+lon_lat_box=$7
+timestep=$8
 
-temp_file="${out_file}_temp"
-
-### Opitons for CDO command
-# Create string for CDO command seltime
-timestep_str=''
-d='1970-01-01 00:00:00'
-while [ $(date -d "${d}" "+%d") == '01' ]; do
+# Iterate through all timesteps in the file
+d=${out_date}
+while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
+    # timestep string (needed for cdo seltime)
     s="$(date -d "${d}" +%H:%M:%S)"
-    timestep_str="${timestep_str},${s}" 
-    d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M:%S")  
+    # name of outfile
+    date_str=$(date -d "${d}" "+%Y%m%d_%H%M")
+    out_file="${out_dir}/${variable}_${date_str}.nc"
+
+    # CDO command
+    # selct timestep, change parameter table, select variable, remap, select lon-lat box
+    cdo ${CDO_OPTS} \
+    sellonlatbox,${lon_lat_box} \
+    -remap,${grid_file},${weights_file} \
+    -selvar,${variable} \
+    -setpartabn,$PARTAB \
+    -seltime,${s} \
+    ${in_file} ${out_file} \
+    || echo 'timestep was not found in file'
+    
+    # for surface pressure: Add additional dimension of size 1
+    if [ ${variable} == 'PS' ]; then
+        ncap2 -O -s 'defdim("height",1);PS[$time,$height,$lat,$lon]=PS' ${out_file} ${out_file} 
+    fi
+
+    d=$(date -d "${d} ${timestep} minutes" "+%Y%m%d %H%M")  
 done
-
-### CDO command
-# select latitude-longitude box
-# regrid to latitude-longitude grid
-# select variabble
-# rename variables
-# select timesteps
-cdo ${CDO_OPTS} \
-sellonlatbox,${lon_lat_box} \
--remap,${grid_file},${weights_file} \
--selvar,${variable} \
--setpartabn,$PARTAB \
--seltime${timestep_str} \
-${in_file} ${temp_file}
-
-### Additional height dimension for PS
-if [ ${variable} == 'PS' ]; then
-    ncap2 -O -s 'defdim("height",1);PS[$time,$height,$lat,$lon]=PS' ${temp_file} ${temp_file} 
-fi
-
-### Split file into one file for each time step  
-cdo ${CDO_OPTS} splithour ${temp_file} ${out_file}
-# Alternative: 
-# get number of timesteps in temp_file
-# select timesteps one after another with cdo
-# name outfile like outfile-date (date + hour) + timestep
-
-rm ${temp_file}
-
-
-
 
