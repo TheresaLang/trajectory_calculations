@@ -33,7 +33,7 @@ case ${run} in
     "ots0001")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" +%Y%m%d_%H%M)
+            datestr=$(date -d "${d}" +%Y%m%d_%H)
             file="${directory}/${var}_${datestr}_"
             echo ${file}
             if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then
