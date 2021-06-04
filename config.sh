@@ -6,4 +6,4 @@ timestep=30 # in minutes
 lon_lat_box='-180,180,-70,70'
 grid_file='/work/mh0066/m300752/DYAMOND++/data/weight/griddes_01x01.txt'
 weights_file='/mnt/lustre02/work/mh1126/m300773/OTS/weights_R2B09_0.1deg.nc'
-out_dir='/mnt/lustre02/work/mh1126/m300773/lagranto_input
+out_dir='/mnt/lustre02/work/mh1126/m300773/lagranto_input'
