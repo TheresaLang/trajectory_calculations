@@ -26,7 +26,7 @@ done
 ### merge files (call merge_files.sh) after status of all previous jobs is "ok"
 d=${start_date}
 while [ "${d}" != "${end_date}" ]; do
-    datestr=$(date -d "${d}" +%Y%m%d_%H)
+    datestr=$(date -d "${d}" +%Y%m%d_%H%M)
     sbatch --dependency=afterok${job_ids} merge_files.sh "${out_dir}/${run}/*${datestr}.nc" "${out_dir}/${run}/P${datestr}"
     d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M")
 done
