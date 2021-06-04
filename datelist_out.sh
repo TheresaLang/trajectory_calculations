@@ -1,21 +1,18 @@
 #!/bin/bash
 
-out_dir=$1
-run=$2
-var=$3
-start_date=$4
-end_date=$5
+run=$1
+var=$2
+start_date=$3
+end_date=$4
 
 filelist=()
-directory="${out_dir}/${run}"
 case ${run} in
 
     "dpp0029")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" +%Y%m%d)
-            file="${directory}/${var}_${datestr}_"
-            echo ${file}
+            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
+            echo ${datestr}
             d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
@@ -23,9 +20,8 @@ case ${run} in
     "nwp0005")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" +%Y%m%d)
-            file="${directory}/${var}_${datestr}_"
-            echo ${file}
+            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
+            echo ${datestr}
             d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
@@ -33,9 +29,8 @@ case ${run} in
     "ots0001")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" +%Y%m%d_%H)
-            file="${directory}/${var}_${datestr}_"
-            echo ${file}
+            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
+            echo ${datestr}
             if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then
                 d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
             else
