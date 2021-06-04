@@ -15,10 +15,10 @@ for var in ${variables[@]}; do
     echo ${var}
     # get list of files to process
     read -r -a filelist_in <<< $(bash filelist_in.sh ${run} ${var} "${start_date}" "${end_date}")
-    read -r -a filelist_out <<< $(bash filelist_out.sh ${out_dir} ${run} ${var} "${start_date}" "${end_date}")
+    read -r -a datelist_out <<< $(bash datelist_out.sh ${run} ${var} "${start_date}" "${end_date}")
     for i in ${!filelist_in[@]}; do
 	# Submit batch job and remember job ID
-        id=$(sbatch process_file.sh ${filelist_in[i]} ${filelist_out[i]} ${grid_file} ${weights_file} ${var} ${lon_lat_box} ${timestep})
+        id=$(sbatch process_file.sh ${filelist_in[i]} ${out_dir}/${run} ${datelist_out[i]} ${grid_file} ${weights_file} ${var} ${lon_lat_box} ${timestep})
 	job_ids="${job_ids}:${id:20:28}"
     done
 done
