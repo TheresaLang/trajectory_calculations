@@ -1,19 +1,10 @@
 #!/bin/bash
 
-# general settings
-source config.sh
+# CDO settings
+source cdo_config.sh
 
 # specific settings
-run='nwp0005'
-variables=('W' 'U' 'V' 'QV' 'P' 'T' 'PS')
-start_date='2020-02-01 00:00'
-end_date='2020-02-05 00:00'
-timestep=180 # in minutes
-lon_lat_box='-180,180,-70,70'
-grid_file='/work/mh0066/m300752/DYAMOND++/data/weight/griddes_1x1.txt'
-weights_file='/work/mh0066/m300752/DYAMOND++/data/weight/weight_dpp0016_1x1.nc'
-out_dir='/mnt/lustre02/work/mh1126/m300773/lagranto_input'
-
+source config.sh
 
 ### Create directory for output if it does not exist
 [ ! -d "${out_dir}/${run}" ] && mkdir "${out_dir}/${run}"
