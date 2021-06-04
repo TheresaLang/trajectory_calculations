@@ -12,7 +12,7 @@ case ${run} in
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo ${datestr}
+            echo "${datestr},"
             d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
@@ -21,7 +21,7 @@ case ${run} in
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo ${datestr}
+            echo "${datestr},"
             d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
@@ -30,7 +30,7 @@ case ${run} in
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo ${datestr}
+            echo "${datestr},"
             if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then
                 d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
             else
