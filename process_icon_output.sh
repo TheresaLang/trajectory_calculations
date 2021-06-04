@@ -30,10 +30,10 @@ while [ "${d}" != "${end_date}" ]; do
     p_file_str=""
     s_file_str=""
     for var in ${p_variables[@]}; do
-        p_file_str="${p_file_str}${out_dir}/${run}/${var}_${datestr}.nc"
+        p_file_str="${p_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
     done
     for var in ${s_variables[@]}; do
-        s_file_str="${s_file_str}${out_dir}/${run}/${var}_${datestr}.nc"
+        s_file_str="${s_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
     done
     sbatch --dependency=afterok${job_ids} merge_files.sh "${p_file_str}" "${out_dir}/${run}/P${datestr}"
     sbatch --dependency=afterok${job_ids} merge_files.sh "${s_file_str}" "${out_dir}/${run}/S${datestr}"
