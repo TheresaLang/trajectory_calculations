@@ -1,9 +1,0 @@
-run='ots0001'
-variables=('T' 'PS')
-start_date='2020-01-20 00:00'
-end_date='2020-01-22 00:00'
-timestep=30 # in minutes
-lon_lat_box='-180,180,-70,70'
-grid_file='/work/mh0066/m300752/DYAMOND++/data/weight/griddes_01x01.txt'
-weights_file='/mnt/lustre02/work/mh1126/m300773/OTS/weights_R2B09_0.1deg.nc'
-out_dir='/mnt/lustre02/work/mh1126/m300773/lagranto_input'
