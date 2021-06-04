@@ -56,6 +56,10 @@ fi
 
 ### Split file into one file for each time step  
 cdo ${CDO_OPTS} splithour ${temp_file} ${out_file}
+# Alternative: 
+# get number of timesteps in temp_file
+# select timesteps one after another with cdo
+# name outfile like outfile-date (date + hour) + timestep
 
 rm ${temp_file}
 
