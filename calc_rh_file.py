@@ -1,0 +1,59 @@
+import sys
+import numpy as np
+import typhon
+import xarray as xr
+
+P_file = sys.argv[1]
+S_file = sys.argv[2]
+z_file = sys.argv[3]
+RH_file = sys.argv[4]
+
+def calc_crh(vmr, p, t, z):
+    """ Calculate column relative humidity"""
+    mid_trop = np.logical_and(p <= 85000, p >= 30000)
+    vmr[np.logical_not(mid_trop)] = 0.
+    vmr_s = typhon.physics.e_eq_mixed_mk(t) / p
+    vmr_s[np.logical_not(mid_trop)] = 0.
+    iwv = typhon.physics.integrate_water_vapor(vmr, p, t, z)
+    iwv_s = typhon.physics.integrate_water_vapor(vmr_s, p, t, z)
+    crh = iwv / iwv_s
+    return crh
+
+# read p, T and q from files
+ds_P = xr.load_dataset(P_file)
+time = ds_P["time"]
+height = ds_P["height_2"]
+lon = ds_P["lon"]
+lat = ds_P["lat"]
+p = ds_P["P"]
+
+ds_S = xr.load_dataset(S_file)
+t = ds_S['T']
+q = ds_S['QV']
+
+ds_z = xr.load_dataset(z_file)
+z_half = ds_z['z_mc']
+z = z_half[:-1] + 0.5 * np.diff(z_half, axis=0)
+
+# calculate RH and CRH
+vmr = typhon.physics.specific_humidity2vmr(q.data) #volume mixing ratio (vmr) 
+rh = typhon.physics.vmr2relative_humidity(vmr, p.data, t.data, e_eq=typhon.physics.e_eq_mixed_mk) #RH
+crh = calc_crh(vmr[0], p.data[0], t.data[0], z.data)
+
+# save
+ds_RH = xr.Dataset(
+    {
+        "RH": (["time", "heigh_2", "lat", "lon"], rh),
+        "CRH": (["lat", "lon"], crh)
+    },
+    coords = {
+        "time": (["time"], time),
+        "height": (["height"], height),
+        "lat": (["lat"], lat),
+        "lon": (["lon"], lon)
+    }
+)
+
+ds_RH.to_netcdf(RH_file)
+
+
