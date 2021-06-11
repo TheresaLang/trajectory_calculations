@@ -4,30 +4,33 @@ from os.path import join
 from datetime import datetime, timedelta
 import startf_utils as utils
 
-startf_dir = "/mnt/lustre02/work/um0878/users/tlang/work/rh_sensitivity/lagranto/runscripts/ots0001"
-pw_dir = "/mnt/lustre02/work/mh1126/m300773/lagranto_input/ots0001"
-start_date = datetime.datetime(2020, 2, 8, 23, 0)
-end_date = datetime.datetime(2020, 2, 8, 23, 30)
-timestep = datetime.timedelta(minutes=30)
-num_trajectories = 1000
-pw_start = 25
-pw_end = 37 
+arg = sys.argv
+exp_name = arg[1]
+lagranto_run_dir = arg[2]
+first_start_date = datetime.strptime(arg[3], '%Y-%m-%d %H:%M')
+last_start_date = datetime.strptime(arg[4], '%Y-%m-%d %H:%M')
+start_time_interval = timedelta(hours=float(arg[5]))
+num_traj_per_start_time = int(arg[6])
+num_batches = int(arg[7])
+pw_start = float(arg[8])
+pw_end = float(arg[9])
 heights = [5000]
 
-date = start_date
-while date <= end_date:
+date = first_start_date
+while date <= last_start_date:
     # filenames
     date_str = date.strftime("%Y%m%d_%H%M")
-    pw_file = join(pw_dir, f"S{date_str}")
-    startf_file = join(startf_dir, f"startf_{date_str}")
+    pw_file = join(lagranto_run_dir, f"S{date_str}")
+    startf_file = join(lagranto_run_dir, f"{exp_name}_startf_{date_str}")
     # read PW from file
     lat, lon, pw = utils.read_pw(pw_file)
     # get random coordinates in a specified range of PW
-    rand_lat, rand_lon = utils.rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_trajectories)
+    rand_lat, rand_lon = utils.rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_traj_per_start_time)
     # write coordinates to startf file
-    utils.write_startf(startf_file, rand_lat, rand_lon, heights)
+    rand_lat_split = np.array_split(rand_lat, num_batches)
+    rand_lon_split = np.array_split(rand_lon, num_batches)
+    
+    for i in range(num_batches):
+        utils.write_startf(f"{startf_file}_{i}", rand_lat_split[i], rand_lon_split[i], heights)
 
-    date += timestep
-
-
-
+    date += start_time_interval
