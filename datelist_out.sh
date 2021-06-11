@@ -26,7 +26,7 @@ case ${run} in
         done
         ;;
 
-    "ots0001")
+    "ots0001" | "ots0001_1")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
