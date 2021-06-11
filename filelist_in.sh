@@ -50,7 +50,7 @@ case ${run} in
         done
         ;;
 
-    "ots0001")
+    "ots0001" | "ots0001_1")
         directory='/mnt/lustre02/work/bm1183/OTS/experiments/ots0001'
         var2file["T"]="ots0001_atm_3d_t_ml_"
         var2file["P"]="ots0001_atm_3d_pres_ml_"
@@ -74,6 +74,7 @@ case ${run} in
             fi
         done
         ;;        
+
     *)
         echo "Run ${run} unknown"
         ;;
