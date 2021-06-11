@@ -1,12 +1,7 @@
+import sys
 import numpy as np
-from netCDF4 import Dataset
 from os.path import join
-import random
-import datetime
-import matplotlib.pyplot as plt
-from global_land_mask import globe
-import typhon
-import logging
+from datetime import datetime, timedelta
 import startf_utils as utils
 
 startf_dir = "/mnt/lustre02/work/um0878/users/tlang/work/rh_sensitivity/lagranto/runscripts/ots0001"

@@ -1,12 +1,7 @@
 import numpy as np
 from netCDF4 import Dataset
-from os.path import join
 import random
-import matplotlib.pyplot as plt
 from global_land_mask import globe
-import typhon
-import datetime
-import logging
 
 def read_pw(pw_file):
     """ Read lat, lon and precipitable water (PW) from netCDF file.
