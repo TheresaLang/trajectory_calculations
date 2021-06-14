@@ -33,12 +33,15 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     # name of outfile
     date_str=$(date -d "${d}" "+%Y%m%d_%H%M")
     out_file="${out_dir}/${variable}_${date_str}.nc"
-
+    
+    scaling_command=''
+    [[ ${variable} == 'QV' ]] && scaling_command='-setattribute,QV@units=gkg -expr,QV=QV*1000'
     # CDO command
     # selct timestep, change parameter table, select variable, remap, select lon-lat box
     cdo ${CDO_OPTS} \
     sellonlatbox,${lon_lat_box} \
     -remap,${grid_file},${weights_file} \
+    ${scaling_command} \
     -selvar,${variable} \
     -setpartabn,$PARTAB \
     -seltime,${s} \
