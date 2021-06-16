@@ -109,3 +109,10 @@
  standard_name = precipitable_water
  units        = "kg m-2" 
 /
+
+&parameter 
+ name         = TQV_DIA
+ out_name     = PW
+ standard_name = precipitable_water
+ units        = "kg m-2" 
+/

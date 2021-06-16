@@ -84,6 +84,7 @@ case ${run} in
         var2file["W"]="nwp_R2B09_lkm1006_atm_3d_w_ml_"
         var2file["QV"]="nwp_R2B09_lkm1006_atm_3d_qv_ml_"
         var2file["PS"]="nwp_R2B09_lkm1006_atm2_2d_ml_"
+        var2file["PW"]="nwp_R2B09_lkm1006_atm1_2d_ml_"
 
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
