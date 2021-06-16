@@ -88,7 +88,7 @@ case ${run} in
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
-            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.grb"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
             d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
