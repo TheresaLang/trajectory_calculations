@@ -74,7 +74,27 @@ case ${run} in
             fi
         done
         ;;        
+    
+    "DYAMOND_S_5km")
+        directory="/work/ka1081/DYAMOND/ICON-5km/"
+        var2file["T"]="nwp_R2B09_lkm1006_atm_3d_t_ml_"
+        var2file["P"]="nwp_R2B09_lkm1006_atm_3d_pres_ml_"
+        var2file["U"]="nwp_R2B09_lkm1006_atm_3d_u_"
+        var2file["V"]="nwp_R2B09_lkm1006_atm_3d_v_"
+        var2file["W"]="nwp_R2B09_lkm1006_atm_3d_w_"
+        var2file["QV"]="nwp_R2B09_lkm1006_atm_3d_qv_ml_"
+        var2file["PS"]="nwp_R2B09_lkm1006_atm2_2d_ml_"
 
+        d=${start_date}
+        while [ "${d}" != "${end_date}" ]; do 
+            datestr=$(date -d "${d}" +%Y%m%d)
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+        done
+    ;;
+    
     *)
         echo "Run ${run} unknown"
         ;;
