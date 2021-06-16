@@ -38,7 +38,7 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     [[ ${variable} == 'QV' ]] && scaling_command='-setattribute,QV@units=gkg -expr,QV=QV*1000'
     # CDO command
     # selct timestep, change parameter table, select variable, remap, select lon-lat box
-    cdo ${CDO_OPTS} \
+    cdo ${CDO_OPTS} -f nc4 \
     sellonlatbox,${lon_lat_box} \
     -remap,${grid_file},${weights_file} \
     ${scaling_command} \
