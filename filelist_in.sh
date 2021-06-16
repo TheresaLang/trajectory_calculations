@@ -26,7 +26,7 @@ case ${run} in
             file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
     
@@ -46,7 +46,7 @@ case ${run} in
             file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
 
@@ -68,7 +68,7 @@ case ${run} in
             echo ${file}
             #filelist=(${filelist[@]} ${file})
             if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then      
-                d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+                d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
             else 
                 d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
             fi
@@ -76,7 +76,7 @@ case ${run} in
         ;;        
     
     "DYAMOND_S_5km")
-        directory="/work/ka1081/DYAMOND/ICON-5km/"
+        directory="/work/ka1081/DYAMOND/ICON-5km"
         var2file["T"]="nwp_R2B09_lkm1006_atm_3d_t_ml_"
         var2file["P"]="nwp_R2B09_lkm1006_atm_3d_pres_ml_"
         var2file["U"]="nwp_R2B09_lkm1006_atm_3d_u_"
@@ -91,9 +91,9 @@ case ${run} in
             file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -d "${d} + 1 day" "+%Y-%m-%d %H:%M")
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
-    ;;
+        ;;
     
     *)
         echo "Run ${run} unknown"
