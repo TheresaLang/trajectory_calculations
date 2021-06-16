@@ -79,9 +79,9 @@ case ${run} in
         directory="/work/ka1081/DYAMOND/ICON-5km"
         var2file["T"]="nwp_R2B09_lkm1006_atm_3d_t_ml_"
         var2file["P"]="nwp_R2B09_lkm1006_atm_3d_pres_ml_"
-        var2file["U"]="nwp_R2B09_lkm1006_atm_3d_u_"
-        var2file["V"]="nwp_R2B09_lkm1006_atm_3d_v_"
-        var2file["W"]="nwp_R2B09_lkm1006_atm_3d_w_"
+        var2file["U"]="nwp_R2B09_lkm1006_atm_3d_u_ml_"
+        var2file["V"]="nwp_R2B09_lkm1006_atm_3d_v_ml_"
+        var2file["W"]="nwp_R2B09_lkm1006_atm_3d_w_ml_"
         var2file["QV"]="nwp_R2B09_lkm1006_atm_3d_qv_ml_"
         var2file["PS"]="nwp_R2B09_lkm1006_atm2_2d_ml_"
 
