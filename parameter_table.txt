@@ -125,6 +125,13 @@
 /
 
 &parameter
+ name         = qgvi
+ out_name     = TQG
+ standard_name = total_column_integrated_grauple
+ units        = "kg m-2"
+/
+
+&parameter
  name         = TQS
  out_name     = TQS
  standard_name = total_column_integrated_snow
@@ -132,7 +139,21 @@
 /
 
 &parameter
+ name         = qsvi
+ out_name     = TQS
+ standard_name = total_column_integrated_snow
+ units        = "kg m-2"
+/
+
+&parameter
  name         = TQR
+ out_name     = TQR
+ standard_name = total_column_integrated_rain
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = qrvi
  out_name     = TQR
  standard_name = total_column_integrated_rain
  units        = "kg m-2"
@@ -150,4 +171,25 @@
  out_name     = QI
  standard_name = tot_qi_dia
  units        = "kg kg-1" 
+/
+
+&parameter
+ name         = cllvi
+ out_name     = TQC
+ standard_name = total_cloud_water
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = clivi
+ out_name     = TQI
+ standard_name = total_cloud_ice
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = rlut
+ out_name     = OLR
+ standard_name = toa_outgoing_longwave_flux
+ units        = "W m-2"
 /

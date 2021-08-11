@@ -60,7 +60,12 @@ case ${run} in
         var2file["QV"]="ots0001_atm_3d_qv_ml_"
         var2file["PS"]="ots0001_atm2_2d_ml_"
         var2file["PW"]="ots0001_atm1_2d_ml_"
-
+        var2file["TQC"]="ots0001_atm1_2d_ml_"
+        var2file["TQI"]="ots0001_atm1_2d_ml_"
+        var2file["TQR"]="ots0001_atm1_2d_ml_"
+        var2file["TQS"]="ots0001_atm1_2d_ml_"
+        var2file["TQG"]="ots0001_atm1_2d_ml_"
+        var2file["OLR"]="ots0001_atm_2d_avg_ml_"
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do
             datestr=$(date -d "${d}" +%Y%m%dT%H%M%SZ)
