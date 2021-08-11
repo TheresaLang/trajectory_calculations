@@ -35,7 +35,7 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     out_file="${out_dir}/${variable}_${date_str}.nc"
     
     scaling_command=''
-    [[ ${variable} == 'QV' ]] && scaling_command='-setattribute,QV@units=gkg -expr,QV=QV*1000'
+    [[ ${variable} =~ ^(QV|QC|QI)$ ]] && scaling_command="-setattribute,${variable}@units=gkg -expr,${variable}=${variable}*1000000"
     # CDO command
     # selct timestep, change parameter table, select variable, remap, select lon-lat box
     cdo ${CDO_OPTS} -f nc4 \
