@@ -85,7 +85,12 @@ case ${run} in
         var2file["QV"]="nwp_R2B09_lkm1006_atm_3d_qv_ml_"
         var2file["PS"]="nwp_R2B09_lkm1006_atm2_2d_ml_"
         var2file["PW"]="nwp_R2B09_lkm1006_atm1_2d_ml_"
-
+        var2file["QI"]="nwp_R2B09_lkm1006_atm_3d_tot_qi_dia_ml_"
+        var2file["QC"]="nwp_R2B09_lkm1006_atm_3d_tot_qc_dia_ml_"
+        var2file["TQG"]="nwp_R2B09_lkm1006_atm1_2d_ml_"
+        var2file["TQR"]="nwp_R2B09_lkm1006_atm3_2d_ml_"
+        var2file["TQS"]="nwp_R2B09_lkm1006_atm1_2d_ml_"
+	
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" +%Y%m%d)
