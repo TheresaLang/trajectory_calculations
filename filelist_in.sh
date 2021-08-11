@@ -72,7 +72,7 @@ case ${run} in
             file="${directory}/${var2file[${var}]}${datestr}.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then      
+            if [[ ${var} =~ ^(PS|PW|TQI|TQC|TQR|TQS|TQG)$ ]]; then      
                 d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
             else 
                 d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")

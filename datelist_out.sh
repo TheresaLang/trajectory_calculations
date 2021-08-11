@@ -31,7 +31,7 @@ case ${run} in
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
             echo "${datestr},"
-            if [[ ${var} == 'PS' || ${var} == 'PW' ]]; then
+            if [[ ${var} =~ ^(PS|PW|TQI|TQC|TQR|TQS|TQG)$ ]]; then
                 d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
             else
                 d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
