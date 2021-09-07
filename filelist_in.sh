@@ -105,6 +105,26 @@ case ${run} in
             d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
+     
+    "dap0013")
+        directory="/work/mh0033/m300466/icon-aes/icon-aes/experiments/dap0013-dc"
+        var2file["T"]="dap0013-dc_atm_3d_3_ml_"
+        var2file["P"]="dap0013-dc_atm_3d_1_ml_"
+        var2file["U"]="dap0013-dc_atm_3d_2_ml_"
+        var2file["V"]="dap0013-dc_atm_3d_2_ml_"
+        var2file["QV"]="dap0013-dc_atm_3d_3_ml_"
+        var2file["PS"]="dap0013-dc_atm_2d_ml_"
+        var2file["PW"]="dap0013-dc_atm_2d_ml_"
+
+        d=${start_date}
+        while [ "${d}" != "${end_date}" ]; do
+            datestr=$(date -d "${d}" +%Y%m%d)
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
+        done
+        ;;
     
     *)
         echo "Run ${run} unknown"

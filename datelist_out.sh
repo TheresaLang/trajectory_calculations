@@ -48,6 +48,15 @@ case ${run} in
         done
         ;;
 
+    "dap0013")
+        d=${start_date}
+        while [ "${d}" != "${end_date}" ]; do
+            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
+            echo "${datestr},"
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
+        done
+        ;;
+    
     *)
         echo "Run ${run} unknown"
         ;;
