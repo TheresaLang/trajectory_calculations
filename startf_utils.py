@@ -3,21 +3,35 @@ from netCDF4 import Dataset
 import random
 from global_land_mask import globe
 
-def read_pw(pw_file):
-    """ Read lat, lon and precipitable water (PW) from netCDF file.
+def read_lat_lon(file):
+    """ Reat latitudes and longitudes from file.
     
     Parameters:
-        pw_file (str): Path to file
-        
+        file (str): full path to file
+    
     Returns:
-        1darray: longitude [deg north]
-        1darray: latitude [deg east]
-        2darray: precipitable water [kg m-2]
+        1darray: latitude [deg north]
+        1darray: longitude [deg east]
     """
-    with Dataset(pw_file) as ds:
+    
+    with Dataset(file) as ds:
         lon = ds.variables["lon"][:].filled(np.nan)
         lat = ds.variables["lat"][:].filled(np.nan)
-        pw = ds.variables["PW"][0].filled(np.nan)
+        
+    return lat, lon
+
+def read_variable(file, varname):
+    """ Read variable from netCDF file.
+    
+    Parameters:
+        file (str): full path to file
+    
+    Returns:
+        ndarray: variable field
+    """
+    
+    with Dataset(file) as ds:
+        var = ds.variables[varname][:].filled(np.nan)
     
     return lat, lon, pw
 

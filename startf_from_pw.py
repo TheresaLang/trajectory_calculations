@@ -19,11 +19,12 @@ heights = [5000]
 date = first_start_date
 while date <= last_start_date:
     # filenames
-    date_str = date.strftime("%Y%m%d_%H%M")
+    date_str = date.strftime("%Y%m%d_%H")
     pw_file = join(lagranto_run_dir, f"S{date_str}")
     startf_file = join(lagranto_run_dir, f"{exp_name}_startf_{date_str}")
     # read PW from file
-    lat, lon, pw = utils.read_pw(pw_file)
+    lat, lon = utils.read_lat_lon(pw_file)
+    pw = utils.read_var(pw_file, 'PW')
     # get random coordinates in a specified range of PW
     rand_lat, rand_lon = utils.rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_traj_per_start_time)
     # write coordinates to startf file
