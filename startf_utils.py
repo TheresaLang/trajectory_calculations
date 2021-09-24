@@ -33,7 +33,37 @@ def read_variable(file, varname):
     with Dataset(file) as ds:
         var = ds.variables[varname][:].filled(np.nan)
     
-    return lat, lon, pw
+    return var[0] if var.shape[0] == 1 else var
+
+def calc_fth(rh, z, layer_thickness, z_start=4000, z_end=8000):
+    """ Calculate mean relative humidity over a given altitude layer.
+    All input parameters should have dimensions (height, lat, lon).
+    
+    Parameters:
+        rh (3darray): relative humidity
+        z (3darray): geometric height of model levels in m
+        layer_thickness (3darray): thickness of model levels in m
+        z_start (float): lower boundary of FTH layer in m
+        z_end (float): upper boundary of FTH layer in m
+        
+    Returns:
+        3darray: mean relative humidity in specified altitude layer
+    """
+    
+    fth = np.empty_like(rh[0])
+    fth[:] = np.nan
+    
+    for la in range(len(lat)):
+        for lo in range(len(lon)):
+            # determine height levels between z_start and z_end
+            ind_fth = np.logical_and(z[:, la, lo] > z_start, z[:, la, lo] < z_end)
+            # calculate mean rh in these levels (weight with level thickness)
+            fth[la, lo] = np.average(rh[ind_fth, la, lo], weights=layer_thickness[ind_fth, la, lo], axis=0)
+    
+    # set FTH to nan, where mountains protrude into the FTH layer
+    fth[z[-1] > z_start] = np.nan
+        
+    return fth
 
 def create_random_indices(mask, num_samples):
     """ Create arrays of random x and y indices for a 2D array ``mask``.
