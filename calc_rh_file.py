@@ -16,30 +16,13 @@
 import xarray as xr
 import sys
 import numpy as np
-import typhon
+from startf_utils import calc_fth
 import trajectory_utils
 
 P_file = sys.argv[1]
 S_file = sys.argv[2]
 z_file = sys.argv[3]
 RH_file = sys.argv[4]
-
-def calc_fth(rh, z, layer_thickness, z_start=4000, z_end=8000):
-    """ Calculate mean relative humidity over a given height level"""
-    
-    fth = np.empty_like(rh[0])
-    fth[:] = np.nan
-    
-    for la in range(len(lat)):
-        for lo in range(len(lon)):
-            ind_fth = np.logical_and(z[:, la, lo] > z_start, z[:, la, lo] < z_end)
-            fth[la, lo] = np.average(rh[ind_fth, la, lo], weights=layer_thickness[ind_fth, la, lo], axis=0)
-    
-    # set FTH to nan, where mountains protrude into the FTH layer
-    fth[z[-1] > z_start] = np.nan
-        
-    return fth
-    
 
 # read dimensions, p, T and q from files
 ds_P = xr.load_dataset(P_file)
