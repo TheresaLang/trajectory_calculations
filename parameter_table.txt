@@ -26,6 +26,13 @@
  units        = "Pa" 
 /
 
+&parameter
+ name         = pfull
+ out_name     = P
+ standard_name = air_pressure
+ units        = "Pa"
+/
+
 &parameter 
  name         = ua
  out_name     = U
