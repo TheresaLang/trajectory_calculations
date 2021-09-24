@@ -107,7 +107,7 @@ case ${run} in
         ;;
      
     "dap0013")
-        directory="/work/mh0033/m300466/icon-aes/icon-aes/experiments/dap0013-dc"
+        directory="/mnt/lustre01/work/mh0287/m300466/icon-dc/experiments/dap0013-dc"
         var2file["T"]="dap0013-dc_atm_3d_3_ml_"
         var2file["P"]="dap0013-dc_atm_3d_1_ml_"
         var2file["U"]="dap0013-dc_atm_3d_2_ml_"
