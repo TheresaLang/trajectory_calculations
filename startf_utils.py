@@ -115,17 +115,25 @@ def rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_coordinates):
     
     return rand_lat, rand_lon
 
-def write_startf(file, rand_lat, rand_lon, heights):
+def rand_heights(height_bounds, size):
+    """ Returns random heights between height_bounds.
+    
+    Parameters:
+        height_bounds (list of float): Lower and upper bound for heights
+        size (int): Number of random heights
+    """
+    return np.random.random_sample(size) * (height_bounds[1] - height_bounds[0]) + height_bounds[0]
+
+def write_startf(file, rand_lat, rand_lon, rand_heights):
     """ Write startf file that contains start positions for trajectories for lagranto.
     
     Parameters:
         file (str): Full path to startf file
         rand_lat (1darray): random latitudes [deg north]
         rand_lon (1darray): random longitudes [deg east]
-        heights (list of float): heights [m]
+        rand_heights (1darray): random heights [m]
     """
     with open(file, 'x') as f:
-        for height in heights:
-            for la, lo in zip(rand_lon, rand_lat):
-                f.write('{0:10.3f}{1:10.3f}{2:10.3f}\n'.format(la, lo, height))
+        for la, lo, h in zip(rand_lon, rand_lat, rand_heights):
+            f.write('{0:10.3f}{1:10.3f}{2:10.3f}\n'.format(la, lo, h))
 
