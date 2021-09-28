@@ -9,20 +9,21 @@ import trajectory_utils
 arg = sys.argv
 exp_name = arg[1]
 lagranto_run_dir = arg[2]
-first_start_date = datetime.strptime(arg[3], '%Y-%m-%d %H:%M')
-last_start_date = datetime.strptime(arg[4], '%Y-%m-%d %H:%M')
-start_time_interval = timedelta(hours=float(arg[5]))
-num_traj_per_start_time = int(arg[6])
-num_batches = int(arg[7])
-rh_start = float(arg[8])
-rh_end = float(arg[9])
-height_bounds = [float(arg[10]), float(arg[11])]
+data_dir = arg[3]
+first_start_date = datetime.strptime(arg[4], '%Y-%m-%d %H:%M')
+last_start_date = datetime.strptime(arg[5], '%Y-%m-%d %H:%M')
+start_time_interval = timedelta(hours=float(arg[6]))
+num_traj_per_start_time = int(arg[7])
+num_batches = int(arg[8])
+rh_start = float(arg[9])
+rh_end = float(arg[10])
+height_bounds = [float(arg[11]), float(arg[12])]
 
 date = first_start_date
 while date <= last_start_date:
     # filenames
     date_str = date.strftime("%Y%m%d_%H%M")
-    rh_file = join(lagranto_run_dir, f"RH_{date_str}.nc")
+    rh_file = join(data_dir, f"RH_{date_str}.nc")
     startf_file = join(lagranto_run_dir, f"{exp_name}_startf_{date_str}")
     # read RH from file
     lat, lon = utils.read_lat_lon(rh_file)
