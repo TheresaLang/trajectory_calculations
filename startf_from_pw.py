@@ -14,7 +14,7 @@ num_traj_per_start_time = int(arg[6])
 num_batches = int(arg[7])
 pw_start = float(arg[8])
 pw_end = float(arg[9])
-heights = [5000]
+height_bounds = [float(arg[10]), float(arg[11])]
 
 date = first_start_date
 while date <= last_start_date:
@@ -27,11 +27,13 @@ while date <= last_start_date:
     pw = utils.read_var(pw_file, 'PW')
     # get random coordinates in a specified range of PW
     rand_lat, rand_lon = utils.rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_traj_per_start_time)
-    # write coordinates to startf file
+    rand_heights = utils.rand_heights(height_bounds, num_traj_per_start_time)
+    # split into batches
     rand_lat_split = np.array_split(rand_lat, num_batches)
     rand_lon_split = np.array_split(rand_lon, num_batches)
-    
+    heights_split = np.array_split(rand_heights, num_batches)
+    # write coordinates to startf file
     for i in range(num_batches):
-        utils.write_startf(f"{startf_file}_{i}", rand_lat_split[i], rand_lon_split[i], heights)
+        utils.write_startf(f"{startf_file}_{i}", rand_lat_split[i], rand_lon_split[i], heights_split[i])
 
     date += start_time_interval
