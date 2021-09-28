@@ -1,4 +1,4 @@
-#!/bin/bash
+#!bin/bash
 set -o errexit -o nounset
 source run_config
 # create run directory
@@ -13,4 +13,7 @@ bash link_runscripts.sh
 # create startf files
 echo 'create startf files' 
 num_batches=$((${num_nodes_per_start_time}*${num_cores_per_node}))
-python ../random_starting_points/startf_from_pw.py ${exp_name} ${lagranto_run_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${num_batches} ${pw_start} ${pw_end} 
+if [[ region_def == 'pw' ]]; then
+    python ../random_starting_points/startf_from_pw.py ${exp_name} ${lagranto_run_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${num_batches} ${val_start} ${val_end} ${height_start} ${height_end}
+elif [[ region_def == 'rh' ]]; then
+    python ../random_starting_points/startf_from_rh.py ${exp_name} ${lagranto_run_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${num_batches} ${val_start} ${val_end} ${height_start} ${height_end} 
