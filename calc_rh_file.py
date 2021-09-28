@@ -45,10 +45,11 @@ fth = calc_fth(rh, z, layer_thickness) #FTH
 
 # save
 rh = np.expand_dims(rh, 0)
+fth = np.expand_dims(fth, 0)
 ds_RH = xr.Dataset(
     {
         "RH": (ds_S["T"].dims, rh),
-        "FTH": (["lat", "lon"], fth)
+        "FTH": (["time", "lat", "lon"], fth)
     },
     coords = ds_S.coords
 )
