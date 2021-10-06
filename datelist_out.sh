@@ -7,8 +7,7 @@ end_date=$4
 
 filelist=()
 case ${run} in
-
-    "dpp0029")
+    "dpp0029" | "hsc0030" | "nwp0005" | "dap0013" | "DYAMOND_S_5km")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
@@ -17,15 +16,6 @@ case ${run} in
         done
         ;;
     
-    "nwp0005")
-        d=${start_date}
-        while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo "${datestr},"
-            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
-        done
-        ;;
-
     "ots0001" | "ots0001_1")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
@@ -36,24 +26,6 @@ case ${run} in
             else
                 d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
             fi
-        done
-        ;;
-    
-    "DYAMOND_S_5km")
-        d=${start_date}
-        while [ "${d}" != "${end_date}" ]; do 
-            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo "${datestr},"
-            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
-        done
-        ;;
-
-    "dap0013")
-        d=${start_date}
-        while [ "${d}" != "${end_date}" ]; do
-            datestr=$(date -d "${d}" "+%Y%m%d %H%M")
-            echo "${datestr},"
-            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
         ;;
     
