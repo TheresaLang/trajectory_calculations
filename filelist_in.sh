@@ -9,8 +9,8 @@ filelist=()
 declare -A var2file
 
 case ${run} in
-    "hsc0030")
-        directory="/work/mh0066/m218038/models/avr/icon-aes/experiments/hsc0030"
+    "hsc0030" | "hsc0032")
+        directory="/work/mh0066/m218038/models/avr/icon-aes/experiments/${run}"
         var2file["T"]="hsc0030_atm_traj_3d_t_ml_"
         var2file["P"]="hsc0030_atm_traj_3d_pres_ml_"
         var2file["U"]="hsc0030_atm_traj_3d_u_ml_"
