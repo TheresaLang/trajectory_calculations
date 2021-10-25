@@ -15,7 +15,7 @@ case ${run} in
         var2file["P"]="hsc0030_atm_traj_3d_pres_ml_"
         var2file["U"]="hsc0030_atm_traj_3d_u_ml_"
         var2file["V"]="hsc0030_atm_traj_3d_v_ml_"
-        var2file["W"]="hsc0030_atm_traj_3d_w_ml"
+        var2file["W"]="hsc0030_atm_traj_3d_w_ml_"
         var2file["QV"]="hsc0030_atm_traj_3d_qv_ml_"
         var2file["dQV_M"]="hsc0030_atm_traj_3d_dqvmig_ml_"
         var2file["dQV_T"]="hsc0030_atm_traj_3d_dqvvdf_ml_"
