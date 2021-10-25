@@ -203,21 +203,21 @@
 
 &parameter
  name         = tend_qhus_dyn
- out_name     = dQ_D
+ out_name     = dQV_D
  standard_name = tend_qhus_dyn
  units        = "kg kg-1 s-1"
 /
 
 &parameter
  name         = tend_qhus_mig
- out_name     = dQ_M
+ out_name     = dQV_M
  standard_name = tend_qhus_mig
  units        = "kg kg-1 s-1"
 /
 
 &parameter
  name         = tend_qhus_vdf
- out_name     = dQ_T
+ out_name     = dQV_T
  standard_name = tend_qhus_vdf
  units        = "kg kg-1 s-1"
 /
