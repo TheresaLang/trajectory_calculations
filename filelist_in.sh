@@ -11,16 +11,17 @@ declare -A var2file
 case ${run} in
     "hsc0030" | "hsc0032")
         directory="/work/mh0066/m218038/models/avr/icon-aes/experiments/${run}"
-        var2file["T"]="hsc0030_atm_traj_3d_t_ml_"
-        var2file["P"]="hsc0030_atm_traj_3d_pres_ml_"
-        var2file["U"]="hsc0030_atm_traj_3d_u_ml_"
-        var2file["V"]="hsc0030_atm_traj_3d_v_ml_"
-        var2file["W"]="hsc0030_atm_traj_3d_w_ml_"
-        var2file["QV"]="hsc0030_atm_traj_3d_qv_ml_"
-        var2file["dQV_M"]="hsc0030_atm_traj_3d_dqvmig_ml_"
-        var2file["dQV_T"]="hsc0030_atm_traj_3d_dqvvdf_ml_"
-        var2file["dQV_D"]="hsc0030_atm_traj_3d_dqvdyn_ml_"
-        var2file["PS"]="hsc0030_atm_traj_2d_ml_"
+        var2file["T"]="${run}_atm_traj_3d_t_ml_"
+        var2file["P"]="${run}_atm_traj_3d_pres_ml_"
+        var2file["U"]="${run}_atm_traj_3d_u_ml_"
+        var2file["V"]="${run}_atm_traj_3d_v_ml_"
+        var2file["W"]="${run}_atm_traj_3d_w_ml_"
+        var2file["QV"]="${run}_atm_traj_3d_qv_ml_"
+        var2file["dQV_M"]="${run}_atm_traj_3d_dqvmig_ml_"
+        var2file["dQV_T"]="${run}_atm_traj_3d_dqvvdf_ml_"
+        var2file["dQV_D"]="${run}_atm_traj_3d_dqvdyn_ml_"
+        var2file["PS"]="${run}_atm_traj_2d_ml_"
+        var2file["PW"]="${run}_atm_traj_2d_ml_"
 
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
