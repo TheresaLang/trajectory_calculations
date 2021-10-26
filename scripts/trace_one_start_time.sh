@@ -3,8 +3,6 @@ set -o errexit -o nounset
 source run_config
 start_time=$1 
 
-ind_core_start=0
-ind_core_end=$((${num_cores_per_node}-1))
 slurm_options="--partition=${partition} --cpus-per-task=${cpus_per_task} --time=${time_limit} --constraint=${memory}"
 
 for var in "${trace_variables[@]}"; do
