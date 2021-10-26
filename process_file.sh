@@ -38,7 +38,7 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     scaling_command=''
     [[ ${variable} =~ ^(QV|QC|QI)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg -expr,${variable}=${variable}*1000000"
     [[ ${variable} =~ ^(TQI|TQC|TQR|TQS|TQG)$ ]] && scaling_command="-setattribute,${variable}@units=mgm-2 -expr,${variable}=${variable}*1000000"
-    
+    [[ ${variable} =~ ^(dQV_T|dQV_M|dQV_D)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg-1s-1 -expr,${variable}=${variable}*1000000"    
     remap_command=''
     [[ ${remap} == 1 ]] && remap_command="-remap,${grid_file},${weights_file}"
 
