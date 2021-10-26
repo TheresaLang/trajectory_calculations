@@ -18,6 +18,6 @@ for var in "${trace_variables[@]}"; do
     done
     # sleep until sub-jobs are running (takes some time because each has to wait until the file trace.config is written and read)
     echo "Wait unitl all jobs are running on node"
-    sleep $((180*${num_cores_per_node}))
+    sleep $((120*${num_cores_per_node}))
 
 done    
