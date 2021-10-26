@@ -20,7 +20,9 @@ for (( i = 0 ; i < ${num_cores_per_node} ; i++ )); do
     outfile="${exp_name}_${var}_traced_${start_time_str}_${i}.4"
     trace.icon ${trajectory_file} ${outfile} -v ${tracevar_file} > "logs/${exp_name}_trace_${var}_${start_time_str}_${i}.out" & 
     # sleep until config.trace file was written and read
-    sleep 120
+    if [[ ${num_cores_per_node} > 1 ]]; then
+        sleep 120    
+    fi
 done
 
 wait
