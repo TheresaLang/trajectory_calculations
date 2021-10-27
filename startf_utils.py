@@ -87,29 +87,32 @@ def create_random_indices(mask, num_samples):
         
     return x_inds, y_inds
 
-def rand_coords_from_pw(lat, lon, pw, pw_start, pw_end, num_coordinates):
+def rand_coords_from_field(lat, lon, field, field_start, field_end, num_coordinates, ocean_only=True):
     """ Returns random coordinates that lie inside the tropics, over ocean
     and within a certain PW (precipitable water) range.
     
     Parameters:
         lat (1darray): latitude [deg north]
         lon (1darray): longitude [deg east]
-        pw (2darray): precipitable water [kg m-2]
-        pw_start (float): lower bound for pw [kg m-2]
-        pw_end (float): upper bound for pw [kg m-2]
+        field (2darray): field (e.g. precipitable water, upper tropospheric rel. humidity)
+        field_start (float): lower bound field
+        field_end (float): upper bound for field
         num_coordinates (int): number of random coordinates
+        ocean_only (boolean): chose only points over ocean
         
     Returns:
         1darray: random latitude values
         1darray: random longitude values
     """
     lon_grid, lat_grid = np.meshgrid(lon, lat)
-    is_ocean = globe.is_ocean(lat_grid, lon_grid)
+    if ocean_only:
+        is_ocean = globe.is_ocean(lat_grid, lon_grid)
     is_tropic = np.abs(lat_grid) <= 30.
-    is_tropic_ocean = np.logical_and(is_ocean, is_tropic)
-    is_in_pw_range = np.logical_and(pw >= pw_start, pw <= pw_end)
-    is_dry_tropic_ocean = np.logical_and(is_in_pw_range, is_tropic_ocean)
-    rand_lat_ind, rand_lon_ind = create_random_indices(is_dry_tropic_ocean, num_coordinates)
+    if ocean_only:
+        is_tropic = np.logical_and(is_ocean, is_tropic)
+    is_in_field_range = np.logical_and(field >= field_start, field <= field_end)
+    is_dry_tropic = np.logical_and(is_in_field_range, is_tropic)
+    rand_lat_ind, rand_lon_ind = create_random_indices(is_dry_tropic, num_coordinates)
     rand_lat = np.array([lat[ind] for ind in rand_lat_ind])
     rand_lon= np.array([lon[ind] for ind in rand_lon_ind])
     
