@@ -1,3 +1,12 @@
+#!/usr/bin/env python
+#SBATCH --output=logs/create_startf-%j.out
+##SBATCH --error=logs/create_startf-%j.err
+
+#SBATCH --account=mh1126             # Charge resources on this project account
+#SBATCH --ntasks=1                   # max. number of tasks to be invoked
+##SBATCH --mem=0                      # use all memory on node
+##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
+
 import sys
 import numpy as np
 from os.path import join
