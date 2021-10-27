@@ -13,17 +13,9 @@ source run_config
 
 start_time=$1
 end_time=$2
-ind_core_start=$3
-ind_core_end=$4
 
 start_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
 end_time_str=$(date -d "${end_time}" "+%Y%m%d_%H%M")
-for ((i = ${ind_core_start} ; i <= ${ind_core_end} ; i++)); do
-    caltra.icon ${start_time_str} ${end_time_str} "${exp_name}_startf_${start_time_str}_${i}" "${exp_name}_trajectory_${start_time_str}_${i}.4" -j -p > "logs/${exp_name}_caltra_${start_time_str}_${i}.out" & 
-    # if several cores are used, sleep until config.caltra file was written and read
-    if [[ ! ${ind_core_start} -eq ${ind_core_end} ]]; then
-        sleep 120
-    fi
-done
+caltra.icon ${start_time_str} ${end_time_str} "${exp_name}_startf_${start_time_str}" "${exp_name}_trajectory_${start_time_str}.4" -j -p > "logs/${exp_name}_caltra_${start_time_str}.out" & 
 
 wait

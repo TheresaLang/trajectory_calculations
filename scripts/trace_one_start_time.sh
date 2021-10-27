@@ -13,7 +13,3 @@ while ((${stat} > 1)); do
     echo "Wait until job is running"
     sleep 5
 done
-# sleep until sub-jobs are running (takes some time because each has to wait until the file trace.config is written and read)
-# echo "Wait unitl all jobs are running on node"
-# sleep $((125*${#trace_variables[@]}))
-

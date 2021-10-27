@@ -15,13 +15,11 @@ start_time=$1
 start_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
 for var in "${trace_variables[@]}"; do
     tracevar_file="tracevars_${var}"
-    for (( i = 0 ; i < ${num_cores_per_node} ; i++ )); do
-        trajectory_file="${exp_name}_trajectory_${start_time_str}_${i}.4"
-        outfile="${exp_name}_${var}_traced_${start_time_str}_${i}.4"
-        trace.icon ${trajectory_file} ${outfile} -v ${tracevar_file} > "logs/${exp_name}_trace_${var}_${start_time_str}_${i}.out" & 
-        # sleep until config.trace file was written and read
-        sleep 120    
-    done
+    trajectory_file="${exp_name}_trajectory_${start_time_str}.4"
+    outfile="${exp_name}_${var}_traced_${start_time_str}.4"
+    trace.icon ${trajectory_file} ${outfile} -v ${tracevar_file} > "logs/${exp_name}_trace_${var}_${start_time_str}.out" & 
+    # sleep until config.trace file was written and read
+    sleep 120    
 done
 
 wait
