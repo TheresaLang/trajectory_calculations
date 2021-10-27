@@ -2,3 +2,4 @@
 logs
 *.nc
 config.sh
+create_iconconst.sh
