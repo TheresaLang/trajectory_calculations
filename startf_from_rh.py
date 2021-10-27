@@ -24,13 +24,17 @@ first_start_date = datetime.strptime(arg[4], '%Y-%m-%d %H:%M')
 last_start_date = datetime.strptime(arg[5], '%Y-%m-%d %H:%M')
 start_time_interval = timedelta(hours=float(arg[6]))
 num_traj_per_start_time = int(arg[7])
-num_batches = int(arg[8])
-rh_start = float(arg[9])
-rh_end = float(arg[10])
-height_bounds = [float(arg[11]), float(arg[12])]
+#num_batches = int(arg[8])
+rh_start = float(arg[8])
+rh_end = float(arg[9])
+height_bounds = [float(arg[10]), float(arg[11])]
 
 date = first_start_date
+print(arg)
+
+
 while date <= last_start_date:
+    print(date)
     # filenames
     date_str = date.strftime("%Y%m%d_%H%M")
     rh_file = join(data_dir, f"RH_{date_str}.nc")
@@ -39,15 +43,10 @@ while date <= last_start_date:
     lat, lon = utils.read_lat_lon(rh_file)
     fth = utils.read_variable(rh_file, 'FTH')
     # get random coordinates in a specified range of PW
-    rand_lat, rand_lon = utils.rand_coords_from_pw(lat, lon, fth, rh_start, rh_end, num_traj_per_start_time)
+    rand_lat, rand_lon = utils.rand_coords_from_field(lat, lon, fth, rh_start, rh_end, num_traj_per_start_time, ocean_only=False)
     rand_heights = utils.rand_heights(height_bounds, num_traj_per_start_time)
-    # split into batches
-    rand_lat_split = np.array_split(rand_lat, num_batches)
-    rand_lon_split = np.array_split(rand_lon, num_batches)
-    heights_split = np.array_split(rand_heights, num_batches)
     
     # write coordinates to startf file
-    for i in range(num_batches):
-        utils.write_startf(f"{startf_file}_{i}", rand_lat_split[i], rand_lon_split[i], heights_split[i])
+    utils.write_startf(startf_file, rand_lat, rand_lon, rand_heights)
 
     date += start_time_interval
