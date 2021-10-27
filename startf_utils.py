@@ -53,8 +53,8 @@ def calc_fth(rh, z, layer_thickness, z_start=4000, z_end=8000):
     fth = np.empty_like(rh[0])
     fth[:] = np.nan
     
-    for la in range(len(lat)):
-        for lo in range(len(lon)):
+    for la in range(rh.shape[1]):
+        for lo in range(rh.shape[2]):
             # determine height levels between z_start and z_end
             ind_fth = np.logical_and(z[:, la, lo] > z_start, z[:, la, lo] < z_end)
             # calculate mean rh in these levels (weight with level thickness)
