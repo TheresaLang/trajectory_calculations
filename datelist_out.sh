@@ -7,7 +7,7 @@ end_date=$4
 
 filelist=()
 case ${run} in
-    "dpp0029" | "hsc0030" | "hsc0032" | "nwp0005" | "dap0013" | "DYAMOND_S_5km")
+    "dpp0029" | "hsc0030" | "hsc0032" | "hsc0034" | "hsc0045" | "nwp0005" | "dap0013" | "DYAMOND_S_5km")
         d=${start_date}
         while [ "${d}" != "${end_date}" ]; do 
             datestr=$(date -d "${d}" "+%Y%m%d %H%M")
