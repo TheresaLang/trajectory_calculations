@@ -11,7 +11,7 @@ source /mnt/lustre02/work/um0878/users/tlang/dev/lagranto/lagranto_config
 source run_config
 
 start_time=$1
-
+echo ${start_time}
 start_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
 for var in "${trace_variables[@]}"; do
     tracevar_file="tracevars_${var}"
@@ -19,7 +19,7 @@ for var in "${trace_variables[@]}"; do
     outfile="${exp_name}_${var}_traced_${start_time_str}.4"
     trace.icon ${trajectory_file} ${outfile} -v ${tracevar_file} > "logs/${exp_name}_trace_${var}_${start_time_str}.out" & 
     # sleep until config.trace file was written and read
-    sleep 120    
+    sleep 45    
 done
 
 wait
