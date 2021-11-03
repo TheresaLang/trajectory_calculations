@@ -1,0 +1,223 @@
+&parameter 
+ name         = ta
+ out_name     = T
+ standard_name = air_temperature 
+ units        = "K" 
+/
+
+&parameter 
+ name         = temp
+ out_name     = T
+ standard_name = air_temperature 
+ units        = "K" 
+/
+
+&parameter 
+ name         = pfull
+ out_name     = P
+ standard_name = air_pressure 
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = pres
+ out_name     = P
+ standard_name = air_pressure 
+ units        = "Pa" 
+/
+
+&parameter
+ name         = pfull
+ out_name     = P
+ standard_name = air_pressure
+ units        = "Pa"
+/
+
+&parameter 
+ name         = ua
+ out_name     = U
+ standard_name = estward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = u
+ out_name     = U
+ standard_name = estward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = va
+ out_name     = V
+ standard_name = northward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = v
+ out_name     = V
+ standard_name = northward_wind
+ units        = "m s-1" 
+/
+
+&parameter 
+ name         = wap
+ out_name     = OMEGA
+ standard_name = upward_air_velocity
+ units        = "Pa s-1" 
+/
+
+&parameter 
+ name         = w
+ out_name     = W
+ standard_name = upward_air_velocity
+ units        = "m s-1" 
+/
+
+&parameter
+ name         = wa
+ out_name     = W
+ standard_name = upward_air_velocity
+ units        = "m s-1"
+/
+
+&parameter 
+ name         = hus
+ out_name     = QV
+ standard_name = tot_qi_dia
+ units        = "kg kg-1" 
+/
+
+&parameter 
+ name         = qv
+ out_name     = QV
+ standard_name = tot_qi_dia
+ units        = "kg kg-1" 
+/
+
+&parameter 
+ name         = ps
+ out_name     = PS
+ standard_name = surface_air_pressure
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = pres_sfc
+ out_name     = PS
+ standard_name = surface_air_pressure
+ units        = "Pa" 
+/
+
+&parameter 
+ name         = prw
+ out_name     = PW
+ standard_name = precipitable_water
+ units        = "kg m-2" 
+/
+
+&parameter 
+ name         = TQV_DIA
+ out_name     = PW
+ standard_name = precipitable_water
+ units        = "kg m-2" 
+/
+
+&parameter
+ name         = TQG
+ out_name     = TQG
+ standard_name = total_column_integrated_grauple
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = qgvi
+ out_name     = TQG
+ standard_name = total_column_integrated_grauple
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = TQS
+ out_name     = TQS
+ standard_name = total_column_integrated_snow
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = qsvi
+ out_name     = TQS
+ standard_name = total_column_integrated_snow
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = TQR
+ out_name     = TQR
+ standard_name = total_column_integrated_rain
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = qrvi
+ out_name     = TQR
+ standard_name = total_column_integrated_rain
+ units        = "kg m-2"
+/
+
+&parameter 
+ name         = QC_DIA
+ out_name     = QC
+ standard_name = tot_qc_dia
+ units        = "kg kg-1" 
+/
+
+&parameter 
+ name         = QI_DIA
+ out_name     = QI
+ standard_name = tot_qi_dia
+ units        = "kg kg-1" 
+/
+
+&parameter
+ name         = cllvi
+ out_name     = TQC
+ standard_name = total_cloud_water
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = clivi
+ out_name     = TQI
+ standard_name = total_cloud_ice
+ units        = "kg m-2"
+/
+
+&parameter
+ name         = rlut
+ out_name     = OLR
+ standard_name = toa_outgoing_longwave_flux
+ units        = "W m-2"
+/
+
+&parameter
+ name         = tend_qhus_dyn
+ out_name     = dQV_D
+ standard_name = tend_qhus_dyn
+ units        = "kg kg-1 s-1"
+/
+
+&parameter
+ name         = tend_qhus_mig
+ out_name     = dQV_M
+ standard_name = tend_qhus_mig
+ units        = "kg kg-1 s-1"
+/
+
+&parameter
+ name         = tend_qhus_vdf
+ out_name     = dQV_T
+ standard_name = tend_qhus_vdf
+ units        = "kg kg-1 s-1"
+/
