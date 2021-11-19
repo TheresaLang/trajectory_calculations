@@ -28,13 +28,23 @@ timestep=$8
 
 # Iterate through all timesteps in the file
 d=${out_date}
+#if [ ${run} == "hsc0036" ]
+#then
+#    end_date=$(date -d "${out_date} 13 hour" "+%d%H")
+#else
+#    end_date=$(date -d "${out_date} 12 hour" "+%d%H")
+#fi
+
+#while [ $(date -d "${d}" "+%d%H") -le ${end_date} ]; do
 while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     # timestep string (needed for cdo seltime)
     s="$(date -d "${d}" +%H:%M:%S)"
     # name of outfile
     date_str=$(date -d "${d}" "+%Y%m%d_%H%M")
-    out_file="${out_dir}/${variable}_${date_str}.nc"
-    
+    if [ ${run} == "hsc0036" ]; then 
+        out_file="${out_dir}/not_interp/${variable}_${date_str}.nc"
+    else
+        out_file="${out_dir}/${variable}_${date_str}.nc"
     scaling_command=''
     [[ ${variable} =~ ^(QV|QC|QI)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg -expr,${variable}=${variable}*1000000"
     [[ ${variable} =~ ^(TQI|TQC|TQR|TQS|TQG)$ ]] && scaling_command="-setattribute,${variable}@units=mgm-2 -expr,${variable}=${variable}*1000000"
