@@ -11,7 +11,7 @@ sbatch ${slurm_options} caltra_node.sh "${start_time}" "${end_time}"
 # sleep until job is running
 stat=$(squeue --start -u $USER | wc -l)
 while ((${stat} > 1)); do
-    stat=$(squeue --start -u $USER | wc -l)
+    stat=$(squeue --start -n caltra_node.sh | wc -l)
     echo "Wait until job is running"
     sleep 5
 done 
