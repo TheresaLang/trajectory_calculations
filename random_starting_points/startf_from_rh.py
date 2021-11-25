@@ -24,10 +24,9 @@ first_start_date = datetime.strptime(arg[4], '%Y-%m-%d %H:%M')
 last_start_date = datetime.strptime(arg[5], '%Y-%m-%d %H:%M')
 start_time_interval = timedelta(hours=float(arg[6]))
 num_traj_per_start_time = int(arg[7])
-#num_batches = int(arg[8])
-rh_start = float(arg[8])
-rh_end = float(arg[9])
-height_bounds = [float(arg[10]), float(arg[11])]
+percentile = float(arg[8])
+#rh_end = float(arg[9])
+height_bounds = [float(arg[9]), float(arg[10])]
 
 date = first_start_date
 print(arg)
@@ -42,6 +41,11 @@ while date <= last_start_date:
     # read RH from file
     lat, lon = utils.read_lat_lon(rh_file)
     fth = utils.read_variable(rh_file, 'FTH')
+    # FTH percentiles
+    rh_start = np.nanpercentile(fth, 0.)
+    rh_end = np.nanpercentile(fth, percentile)
+    print(rh_start)
+    print(rh_end)
     # get random coordinates in a specified range of PW
     rand_lat, rand_lon = utils.rand_coords_from_field(lat, lon, fth, rh_start, rh_end, num_traj_per_start_time, ocean_only=False)
     rand_heights = utils.rand_heights(height_bounds, num_traj_per_start_time)

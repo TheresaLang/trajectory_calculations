@@ -14,7 +14,7 @@ bash link_runscripts.sh
 # create startf files
 echo 'create startf files' 
 if [[ ${region_def} == 'pw' ]]; then
-    sbatch ${slurm_options} ../random_starting_points/startf_from_pw.py ${exp_name} ${lagranto_run_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${val_start} ${val_end} ${height_start} ${height_end}
+    sbatch ${slurm_options} ../random_starting_points/startf_from_pw.py ${exp_name} ${lagranto_run_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${percentile} ${height_start} ${height_end}
 elif [[ ${region_def} == 'rh' ]]; then
-    sbatch ${slurm_options} ../random_starting_points/startf_from_rh.py ${exp_name} ${lagranto_run_dir} ${input_data_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${val_start} ${val_end} ${height_start} ${height_end}
+    sbatch ${slurm_options} ../random_starting_points/startf_from_rh.py ${exp_name} ${lagranto_run_dir} ${input_data_dir} "${first_start_time}" "${last_start_time}" ${start_time_interval} ${num_traj_per_start_time} ${percentile} ${height_start} ${height_end}
 fi 
