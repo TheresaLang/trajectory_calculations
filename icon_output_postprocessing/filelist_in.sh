@@ -43,6 +43,7 @@ case ${run} in
         var2file["QV"]="${run}_atm_traj_3d_qv_ml_"
         var2file["dQV_M"]="${run}_atm_traj_3d_dqvmig_ml_"
         var2file["dQV_T"]="${run}_atm_traj_3d_dqvvdf_ml_"
+        var2file["dQV_TH"]="${run}_atm_traj_3d_dqvhdf_ml_"
         var2file["dQV_D"]="${run}_atm_traj_3d_dqvdyn_ml_"
         var2file["PS"]="${run}_atm_traj_2d_ml_"
         var2file["PW"]="${run}_atm_traj_2d_ml_"
