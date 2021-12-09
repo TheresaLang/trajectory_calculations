@@ -38,15 +38,19 @@ while date <= last_start_date:
     date_str = date.strftime("%Y%m%d_%H%M")
     rh_file = join(data_dir, f"RH_{date_str}.nc")
     startf_file = join(lagranto_run_dir, f"{exp_name}_startf_{date_str}")
-    # read RH from file
-    lat, lon = utils.read_lat_lon(rh_file)
-    fth = utils.read_variable(rh_file, 'FTH')
-    # FTH percentiles
-    rh_start = np.nanpercentile(fth, 0.)
-    rh_end = np.nanpercentile(fth, percentile)
-    print(rh_start)
-    print(rh_end)
-    # get random coordinates in a specified range of PW
+    lat, lon = utils.read_lat_lon(startf_file)
+    
+    if percentile == 100:
+        rh_start = None
+        rh_end = None
+    else:
+        # read RH from file
+        fth = utils.read_variable(rh_file, 'FTH')
+        # FTH percentiles
+        rh_start = np.nanpercentile(fth, 0.)
+        rh_end = np.nanpercentile(fth, percentile)
+
+    # get random coordinates in a specified range of RH
     rand_lat, rand_lon = utils.rand_coords_from_field(lat, lon, fth, rh_start, rh_end, num_traj_per_start_time, ocean_only=False)
     rand_heights = utils.rand_heights(height_bounds, num_traj_per_start_time)
     

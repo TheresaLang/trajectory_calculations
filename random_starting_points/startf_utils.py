@@ -110,9 +110,14 @@ def rand_coords_from_field(lat, lon, field, field_start, field_end, num_coordina
     is_tropic = np.abs(lat_grid) <= 30.
     if ocean_only:
         is_tropic = np.logical_and(is_ocean, is_tropic)
-    is_in_field_range = np.logical_and(field >= field_start, field <= field_end)
-    is_dry_tropic = np.logical_and(is_in_field_range, is_tropic)
-    rand_lat_ind, rand_lon_ind = create_random_indices(is_dry_tropic, num_coordinates)
+    
+    if field_end is None:
+        is_field_in_range = is_tropic
+    else:
+        is_in_field_range = np.logical_and(field >= field_start, field <= field_end)
+        
+    is_tropic_in_range = np.logical_and(is_in_field_range, is_tropic)
+    rand_lat_ind, rand_lon_ind = create_random_indices(is_tropic_in_range, num_coordinates)
     rand_lat = np.array([lat[ind] for ind in rand_lat_ind])
     rand_lon= np.array([lon[ind] for ind in rand_lon_ind])
     
