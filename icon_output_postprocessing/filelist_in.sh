@@ -9,7 +9,7 @@ filelist=()
 declare -A var2file
 
 case ${run} in
-    "hsc0030" | "hsc0032" | "hsc0034" | "hsc0035" )
+    "hsc0030" | "hsc0032" )
         directory="/work/mh0066/m218038/models/avr/icon-aes/experiments/${run}"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
         var2file["P"]="${run}_atm_traj_3d_pres_ml_"
@@ -32,7 +32,52 @@ case ${run} in
             d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
     ;;
+    "hsc0035" | "hsc0034" )
+        directory="/mnt/lustre02/work/bm1183/trajectory_output/${run}"
+        var2file["T"]="${run}_atm_traj_3d_t_ml_"
+        var2file["P"]="${run}_atm_traj_3d_pres_ml_"
+        var2file["U"]="${run}_atm_traj_3d_u_ml_"
+        var2file["V"]="${run}_atm_traj_3d_v_ml_"
+        var2file["W"]="${run}_atm_traj_3d_w_ml_"
+        var2file["QV"]="${run}_atm_traj_3d_qv_ml_"
+        var2file["dQV_M"]="${run}_atm_traj_3d_dqvmig_ml_"
+        var2file["dQV_T"]="${run}_atm_traj_3d_dqvvdf_ml_"
+        var2file["dQV_D"]="${run}_atm_traj_3d_dqvdyn_ml_"
+        var2file["PS"]="${run}_atm_traj_2d_ml_"
+        var2file["PW"]="${run}_atm_traj_2d_ml_"
 
+        d=${start_date}
+        while [ "${d}" != "${end_date}" ]; do 
+            datestr=$(date -d "${d}" +%Y%m%d)
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
+        done
+    ;;
+    "atm_dyamond_summer_avr03_05s" )
+        directory="/mnt/lustre01/work/mh0066/m218036/icon/nextgems_cycle1_zstar_avr/icon-aes/experiments/atm_dyamond_summer_avr03_05s"
+        var2file["T"]="${run}_atm_traj_3d_t_ml_"
+        var2file["P"]="${run}_atm_traj_3d_pres_ml_"
+        var2file["U"]="${run}_atm_traj_3d_u_ml_"
+        var2file["V"]="${run}_atm_traj_3d_v_ml_"
+        var2file["W"]="${run}_atm_traj_3d_w_ml_"
+        var2file["QV"]="${run}_atm_traj_3d_qv_ml_"
+        var2file["dQV_M"]="${run}_atm_traj_3d_dqvmig_ml_"
+        var2file["dQV_T"]="${run}_atm_traj_3d_dqvvdf_ml_"
+        var2file["dQV_D"]="${run}_atm_traj_3d_dqvdyn_ml_"
+        var2file["PS"]="${run}_atm_traj_2d_ml_"
+        var2file["PW"]="${run}_atm_traj_2d_ml_"
+
+        d=${start_date}
+        while [ "${d}" != "${end_date}" ]; do 
+            datestr=$(date -d "${d}" +%Y%m%d)
+            file="${directory}/${var2file[${var}]}${datestr}T000000Z.nc"
+            echo ${file}
+            #filelist=(${filelist[@]} ${file})
+            d=$(date -d "${d} 3 hours" "+%Y-%m-%d %H:%M")
+        done
+    ;;
     "tla0001" )
         directory="/mnt/lustre02/work/bm1183/trajectory_output/${run}"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
