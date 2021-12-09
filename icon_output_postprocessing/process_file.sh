@@ -45,10 +45,11 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
         out_file="${out_dir}/not_interp/${variable}_${date_str}.nc"
     else
         out_file="${out_dir}/${variable}_${date_str}.nc"
+    fi
     scaling_command=''
     [[ ${variable} =~ ^(QV|QC|QI)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg -expr,${variable}=${variable}*1000000"
     [[ ${variable} =~ ^(TQI|TQC|TQR|TQS|TQG)$ ]] && scaling_command="-setattribute,${variable}@units=mgm-2 -expr,${variable}=${variable}*1000000"
-    [[ ${variable} =~ ^(dQV_T|dQV_M|dQV_D)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg-1s-1 -expr,${variable}=${variable}*1000000"    
+    [[ ${variable} =~ ^(dQV_T|dQV_M|dQV_D|dQV_TH)$ ]] && scaling_command="-setattribute,${variable}@units=fgkg-1s-1 -expr,${variable}=${variable}*1000000000000000"    
     remap_command=''
     [[ ${remap} == 1 ]] && remap_command="-remap,${grid_file},${weights_file}"
 
@@ -68,7 +69,5 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     if [ ${variable} == 'PS' ]; then
         ncap2 -O -s 'defdim("height",1);PS[$time,$height,$lat,$lon]=PS' ${out_file} ${out_file} 
     fi
-
-    d=$(date -d "${d} ${timestep} minutes" "+%Y%m%d %H%M")  
+    d=$(date -d "${d} ${timestep} minutes" "+%Y%m%d %H%M")
 done
-
