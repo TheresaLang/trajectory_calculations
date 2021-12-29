@@ -105,7 +105,7 @@ case ${run} in
 
     "hsc0036")
  
-        directory="/mnt/lustre02/work/bm1183/trajectory_output/hsc0036/${run}"
+        directory="/mnt/lustre02/work/bm1183/trajectory_output/${run}"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
         var2file["P"]="${run}_atm_traj_3d_pres_ml_"
         var2file["U"]="${run}_atm_traj_3d_u_ml_"
