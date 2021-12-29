@@ -105,7 +105,7 @@ case ${run} in
 
     "hsc0036")
  
-        directory="/work/mh0066/m218038/models/avr/icon-aes/experiments/${run}"
+        directory="/mnt/lustre02/work/bm1183/trajectory_output/hsc0036/${run}"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
         var2file["P"]="${run}_atm_traj_3d_pres_ml_"
         var2file["U"]="${run}_atm_traj_3d_u_ml_"
@@ -124,7 +124,7 @@ case ${run} in
             file="${directory}/${var2file[${var}]}${datestr}.nc"
             echo ${file}
             #filelist=(${filelist[@]} ${file})
-            d=$(date -d "${d} 12 hours" "+%Y-%m-%d %H:%M")
+            d=$(date -d "${d} 24 hours" "+%Y-%m-%d %H:%M")
         done
     ;;
 
