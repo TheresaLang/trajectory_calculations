@@ -228,3 +228,10 @@
  standard_name = tend_qhus_hdf
  units        = "kg kg-1 s-1"
 /
+
+&parameter
+ name         = tend_qv_two
+ out_name     = dQV_M
+ standard_name = tend_qhus_mig
+ units        = "kg kg-1 s-1"
+/
