@@ -112,7 +112,7 @@ def rand_coords_from_field(lat, lon, field, field_start, field_end, num_coordina
         is_tropic = np.logical_and(is_ocean, is_tropic)
     
     if field_end is None:
-        is_field_in_range = is_tropic
+        is_in_field_range = is_tropic
     else:
         is_in_field_range = np.logical_and(field >= field_start, field <= field_end)
         
