@@ -38,11 +38,13 @@ while date <= last_start_date:
     date_str = date.strftime("%Y%m%d_%H%M")
     rh_file = join(data_dir, f"RH_{date_str}.nc")
     startf_file = join(lagranto_run_dir, f"{exp_name}_startf_{date_str}")
-    lat, lon = utils.read_lat_lon(startf_file)
+    const_file = join(data_dir, "ICONCONST")
+    lat, lon = utils.read_lat_lon(const_file)
     
     if percentile == 100:
         rh_start = None
         rh_end = None
+        fth = None
     else:
         # read RH from file
         fth = utils.read_variable(rh_file, 'FTH')
