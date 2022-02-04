@@ -41,11 +41,7 @@ while [ $(date -d "${d}" "+%d") == $(date -d "${out_date}" "+%d") ]; do
     s="$(date -d "${d}" +%H:%M:%S)"
     # name of outfile
     date_str=$(date -d "${d}" "+%Y%m%d_%H%M")
-    if [ ${run} == "hsc0036" ]; then 
-        out_file="${out_dir}/not_interp/${variable}_${date_str}.nc"
-    else
-        out_file="${out_dir}/${variable}_${date_str}.nc"
-    fi
+    out_file="${out_dir}/${variable}_${date_str}.nc"
     scaling_command=''
     [[ ${variable} =~ ^(QV|QC|QI)$ ]] && scaling_command="-setattribute,${variable}@units=mgkg -expr,${variable}=${variable}*1000000"
     [[ ${variable} =~ ^(TQI|TQC|TQR|TQS|TQG)$ ]] && scaling_command="-setattribute,${variable}@units=mgm-2 -expr,${variable}=${variable}*1000000"
