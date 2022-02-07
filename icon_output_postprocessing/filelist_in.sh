@@ -103,7 +103,7 @@ case ${run} in
         done
     ;;
 
-    "hsc0036")
+    "hsc0036" | "tla0002")
  
         directory="/mnt/lustre02/work/bm1183/trajectory_output/${run}"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
