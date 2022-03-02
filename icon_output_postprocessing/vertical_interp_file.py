@@ -7,7 +7,7 @@
 #SBATCH --partition=compute,compute2
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=36     # Specify number of CPUs per task
-#SBATCH --time=05:00:00        # Set a limit on the total run time
+#SBATCH --time=02:00:00        # Set a limit on the total run time
 #SBATCH --mem=0                # use all memory on node
 #SBATCH --constraint=256G      # only run on fat memory nodes
 #SBATCH --monitoring=meminfo=10,cpu=5,lustre=5
@@ -44,7 +44,7 @@ p_file_in = arg[2]
 s_file_in = arg[3]
 p_file_out = arg[4]
 s_file_out = arg[5]
-
+print(s_file_in)
 vars_2d = ['PS', 'PW']
 vars_halflevs = ['W']
 other_vars = ['height_bnds']
@@ -78,6 +78,14 @@ for file_in, file_out in zip([p_file_in, s_file_in], [p_file_out, s_file_out]):
 
     # get list of variables that need to be interpolated
     vars_interp = list(p.keys())
+    for v in vars_halflevs:
+        if v in vars_interp:
+            p_new[v] = p[v]
+            
+    for v in vars_2d:
+        if v in vars_interp:
+            p_new[v] = p[v]
+    
     for v in vars_2d+vars_halflevs+other_vars:
         if v in vars_interp:
             vars_interp.remove(v)
@@ -99,6 +107,7 @@ for file_in, file_out in zip([p_file_in, s_file_in], [p_file_out, s_file_out]):
         field_interp = xr.concat(interp_arr_list, dim="lon")
         # add interpolated field to dataset
         p_new[v] = field_interp
+
     # save dataset as netcdf
     p_new.to_netcdf(file_out)
     # close datasets
