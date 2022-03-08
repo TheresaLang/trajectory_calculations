@@ -12,11 +12,26 @@
 ##SBATCH --constraint=256G           # only run on fat memory nodes 
 ##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
 
-infiles=$1
-outfile=$2
+set -o errexit -o nounset
 
-echo ${infiles}
-echo ${outfile}
+source config.sh
+source cdo_config.sh
 
-cdo ${CDO_OPTS} merge ${infiles} ${outfile}
-rm ${infiles}
+d=${start_date}
+while [ "${d}" != "${end_date}" ]; do
+    datestr=$(date -d "${d}" +%Y%m%d_%H%M)
+    p_file_str=""
+    s_file_str=""
+    for var in ${p_variables[@]}; do
+        p_file_str="${p_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
+    done
+    for var in ${s_variables[@]}; do
+        s_file_str="${s_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
+    done
+    cdo ${CDO_OPTS} merge "${p_file_str}" "${out_dir}/${run}/P${datestr}"
+    cdo ${CDO_OPTS} merge "${s_file_str}" "${out_dir}/${run}/S${datestr}"
+    rm ${p_file_str}
+    rm ${s_file_str}
+    d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M")
+done
+
