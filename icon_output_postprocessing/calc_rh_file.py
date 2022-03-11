@@ -12,7 +12,6 @@
 ##SBATCH --constraint=256G      # only run on fat memory nodes
 #SBATCH --monitoring=meminfo=10,cpu=5,lustre=5
 ##SBATCH --mail-type=FAIL      # Notify user by email in case of job failure
-
 import xarray as xr
 import sys
 import numpy as np
@@ -23,6 +22,7 @@ P_file = sys.argv[1]
 S_file = sys.argv[2]
 z_file = sys.argv[3]
 RH_file = sys.argv[4]
+print('file ', RH_file)
 
 # read dimensions, p, T and q from files
 ds_P = xr.load_dataset(P_file)
