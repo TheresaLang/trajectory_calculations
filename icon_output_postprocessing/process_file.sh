@@ -7,18 +7,20 @@
 #SBATCH --partition=compute          # partition name
 #SBATCH --ntasks=1                   # max. number of tasks to be invoked
 #SBATCH --cpus-per-task=36           # number of CPUs per task
-#SBATCH --time=04:00:00              # limit on the total run time
+#SBATCH --time=08:00:00              # limit on the total run time
 #SBATCH --mem=0                      # use all memory on node
 ##SBATCH --constraint=256G           # only run on fat memory nodes 
 ##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
 
 # Set shell options (exit on any error, no unset variables, print commands)
 set -o errexit -o nounset -o xtrace
+module load python3
+module load nco
 source cdo_config.sh
 source config.sh
 
 var=$1
-out_dir=${out_dir}/${run}
+out_dir=${out_dir}/${run}/lagranto_input/
 
 # get list of files to process for specified variable
 in=$(bash filelist_in.sh ${run} ${var} "${start_date}" "${end_date}")
@@ -27,6 +29,7 @@ out=$(bash datelist_out.sh ${run} ${var} "${start_date}" "${end_date}")
 out_dates=(${out//,/})
 
 echo ${in_files[@]}
+echo ${out_dates[@]}
 
 for i in ${!in_files[@]}; do
     in_file=${in_files[i]}

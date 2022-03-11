@@ -16,9 +16,9 @@ for var in ${variables[@]}; do
     echo ${var}
     # Submit batch job and remember job ID
     #bash process_file.sh ${var}
-    id=$(sbatch process_file.sh "${filelist_in}" "${datelist_out}" ${out_dir}/${run} ${grid_file} ${weights_file} ${var} ${lon_lat_box} ${timestep})
+    id=$(sbatch process_file.sh ${var}) 
     job_ids="${job_ids}:${id:20:28}"
 done
 
 ### merge files (call merge_files.sh) after status of all previous jobs is "ok"
-sbatch --depenency=afterok{job_ids} merge_files.sh
+#sbatch --depenency=afterok{job_ids} merge_files.sh
