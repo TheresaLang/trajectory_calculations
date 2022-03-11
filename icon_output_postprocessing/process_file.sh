@@ -21,14 +21,16 @@ var=$1
 out_dir=${out_dir}/${run}
 
 # get list of files to process for specified variable
-read -r -a in_files <<< $(bash filelist_in.sh ${run} ${var} "${start_date}" "${end_date}")
-IFS=',' read -r -a out_dates <<< $(bash datelist_out.sh ${run} ${var} "${start_date}" "${end_date}")
+in=$(bash filelist_in.sh ${run} ${var} "${start_date}" "${end_date}")
+in_files=(${in})
+out=$(bash datelist_out.sh ${run} ${var} "${start_date}" "${end_date}")
+out_dates=(${out//,/})
 
 echo ${in_files[@]}
 
 for i in ${!in_files[@]}; do
     in_file=${in_files[i]}
-    out_date=${out_dates[i]}
+    out_date=${out_dates[i]//_/ }
     # Iterate through all timesteps in the file
     d=${out_date}
 #if [ ${run} == "hsc0036" ]
