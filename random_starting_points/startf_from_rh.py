@@ -1,11 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 #SBATCH --output=logs/create_startf-%j.out
-##SBATCH --error=logs/create_startf-%j.err
-
-#SBATCH --account=mh1126             # Charge resources on this project account
 #SBATCH --ntasks=1                   # max. number of tasks to be invoked
-##SBATCH --mem=0                      # use all memory on node
-##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
+#SBATCH --mem=0                      # use all memory on node
 
 import sys
 import numpy as np
@@ -13,8 +9,6 @@ from os.path import join
 from datetime import datetime, timedelta
 from importlib import reload 
 import startf_utils as utils
-import trajectory_utils
-
 print('import')
 arg = sys.argv
 exp_name = arg[1]
