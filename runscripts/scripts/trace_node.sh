@@ -1,14 +1,10 @@
 #!/bin/bash
 #SBATCH --output=logs/trace-%j.out
-##SBATCH --error=logs/trace-%j.err
-
-#SBATCH --account=mh1126             # Charge resources on this project account
 #SBATCH --ntasks=1                   # max. number of tasks to be invoked
 #SBATCH --mem=0                      # use all memory on node
 #SBATCH --exclusive                  # use whole node
-##SBATCH --mail-type=FAIL            # Notify user by email in case of job failure
 set -o errexit -o nounset
-source /mnt/lustre02/work/um0878/users/tlang/dev/lagranto/lagranto_config
+source /work/mh1126/m300773/dev/lagranto/lagranto_config
 source run_config
 
 start_time=$1
