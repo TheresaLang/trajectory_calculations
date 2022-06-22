@@ -12,4 +12,4 @@ while ((${stat} > 1)); do
     sleep 5
 done
 echo "Wait until all jobs are running on node"
-sleep $((${#trace_variables[@]}*46))
+sleep $((${#trace_variables[@]}*50))
