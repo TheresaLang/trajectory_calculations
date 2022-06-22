@@ -20,7 +20,7 @@ source cdo_config.sh
 source config.sh
 
 var=$1
-out_dir=${out_dir}/${run}/lagranto_input/
+out_dir=${out_dir}/${run}/
 
 # get list of files to process for specified variable
 in=$(bash filelist_in.sh ${run} ${var} "${start_date}" "${end_date}")
