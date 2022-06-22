@@ -55,7 +55,7 @@ case ${run} in
             d=$(date -d "${d} 1 day" "+%Y-%m-%d %H:%M")
         done
     ;;
-    "tla0004" | "tla0005" | "tla0007" )
+    "tla0004" | "tla0005" | "tla0006" | "tla0007" )
         directory="/work/mh0287/m300773/experiments/${run}/"
         var2file["T"]="${run}_atm_traj_3d_t_ml_"
         var2file["P"]="${run}_atm_traj_3d_pres_ml_"
