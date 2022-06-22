@@ -23,13 +23,13 @@ while [ "${d}" != "${end_date}" ]; do
     p_file_str=""
     s_file_str=""
     for var in ${p_variables[@]}; do
-        p_file_str="${p_file_str}${out_dir}/${run}/lagranto_input/${var}_${datestr}.nc "
+        p_file_str="${p_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
     done
     for var in ${s_variables[@]}; do
-        s_file_str="${s_file_str}${out_dir}/${run}/lagranto_input/${var}_${datestr}.nc "
+        s_file_str="${s_file_str}${out_dir}/${run}/${var}_${datestr}.nc "
     done
-    cdo ${CDO_OPTS} merge "${p_file_str}" "${out_dir}/${run}/lagranto_input/P${datestr}"
-    cdo ${CDO_OPTS} merge "${s_file_str}" "${out_dir}/${run}/lagranto_input/S${datestr}"
+    cdo ${CDO_OPTS} merge "${p_file_str}" "${out_dir}/${run}/P${datestr}"
+    cdo ${CDO_OPTS} merge "${s_file_str}" "${out_dir}/${run}/S${datestr}"
     rm ${p_file_str}
     rm ${s_file_str}
     d=$(date -d "${d} ${timestep} minutes" "+%Y-%m-%d %H:%M")
