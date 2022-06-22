@@ -20,16 +20,16 @@ def calc_rh_file(ps_files, z_file):
     datestr = os.path.basename(ps_files[0])[1:14]
     out_file = os.path.join(dirname, "RH_"+datestr+".nc")
     args = ["python" , "calc_rh_file.py", ps_files[0], ps_files[1], z_file, out_file]
-    print("+ ", " ".join(args))
-    
-    run(args, check=True)
+    if not os.path.exists(out_file):
+        print("+ ", " ".join(args))
+        run(args, check=True)
     
 
 run_id = sys.argv[1]
-data_dir = f"/work/mh0287/m300773/experiments/{run_id}/lagranto_input/"
+data_dir = f"/work/mh1126/m300773/data/lagranto_input/{run_id}/" #f"/work/mh0287/m300773/experiments/{run_id}/lagranto_input/"
 z_file = os.path.join(data_dir, "ICONCONST")
-p_files = sorted(glob.glob(f"{data_dir}/P2*"))
-s_files = sorted(glob.glob(f"{data_dir}/S2*"))
+p_files = sorted(glob.glob(f"{data_dir}/P2021*"))
+s_files = sorted(glob.glob(f"{data_dir}/S2021*"))
 in_files = list(zip(p_files, s_files))
 
 with Pool(12) as pool:
