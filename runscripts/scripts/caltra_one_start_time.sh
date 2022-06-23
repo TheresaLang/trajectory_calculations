@@ -4,8 +4,10 @@ source run_config
 
 start_time=$1
 end_time=$2
+start_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
+end_time_str=$(date -d "${end_time}" "+%Y%m%d_%H%M")
 
-sbatch ${slurm_options} caltra_node.sh "${start_time}" "${end_time}" 
+sbatch ${slurm_options} caltra_node.sh "${start_time_str}" "${end_time_str}" 
 # sleep until job is running
 stat=$(squeue --start -n caltra | wc -l)
 while ((${stat} > 1)); do
