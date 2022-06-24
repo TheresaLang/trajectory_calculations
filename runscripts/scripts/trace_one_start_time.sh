@@ -2,7 +2,7 @@
 set -o errexit -o nounset
 source run_config
 start_time=$1 
-tart_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
+start_time_str=$(date -d "${start_time}" "+%Y%m%d_%H%M")
 sbatch ${slurm_options} trace_node.sh "${start_time_str}"
 
 stat=$(squeue --start -u $USER | wc -l)
